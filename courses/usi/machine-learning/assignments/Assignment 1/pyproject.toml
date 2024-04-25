@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "assignment1-jeferson-moralesmariciano"
+version = "0.1.0"
+description = "assignment 1 of machine learning regarding regression"
+authors = ["Jeferson Morales Mariciano <jeferson.morales.mariciano@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.26.4"
+scikit-learn = "^1.4.2"
+torch = "^2.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
