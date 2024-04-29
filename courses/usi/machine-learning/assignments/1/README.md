@@ -56,7 +56,7 @@ Please explain it in your own words by using technical details and intuition, wh
 4. Do you think that increasing the model complexity can bring the training error to zero? And the structural risk?
 5. If the X axis represented the training iterations instead, would the training procedure that generated the figure use early stopping? Explain why. (**NB**: ignore the subfigures and the dashed vertical lines)
 
-<img src="./ex_train_val_test.png" style="width:500px"/>
+<img src="Report Template/ex_train_val_test.png" style="width:500px"/>
 
 
 ### Q2. Linear Regression
@@ -89,7 +89,7 @@ Motivate your answers.
 ### Q4.
 Consider the regression problem shown in the picture below and answer each point.
 
-<img src="./parabolic.jpg" style="width:500px"/>
+<img src="Report Template/parabolic.jpg" style="width:500px"/>
 
 1. Do you think a model of the family f(x, theta) = theta_0 + theta_1 * x_1 + theta_2 * x_2 is a good choice for such task? Why?
 
