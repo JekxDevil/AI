@@ -274,17 +274,68 @@ You will get extra points if you provide a model of your choice whose test perfo
 	      If yes, in which of the below subfigures?
 
 	\item[A1.3] ~\\
-
+	      The approximation risk is defined as $\overline{V}(\theta^o) - V_I$
+	      where $\overline{V}(\theta^o)$ is the structural risk
+	      and $V_I$ is the inherent risk.
+	      It depends on how well $f(\hat{\theta}, x) \approx g(x)$.
+	      It can be improved by choosing a more appropriate model family $f'(\hat{\theta}, x)$
+	      reducing the risk.
+	      Figure \ref{fig:ex-q1-training-vs-validation} shows the relationship between
+	      model complexity and error in performance.
+	      The evidence of high approximation risk is present in the subfigures (a.) and (c.).
+	      They are associated with underfitting and overfitting respectively.
+	      High approximation risk for underfitting is due to the model
+	      being too simple to capture underlying patterns,
+	      while for overfitting is the poor generalization behavior on unseen data.
+	      The spot with minimum approximation risk is the optimal model complexity point $\theta^o$
+	      where the data generation function $g(x)$ is best approximated.
 
 	\item[Q1.4] Do you think that increasing the model complexity can bring the training error to zero?
 	      And the structural risk?
+
 	\item[A1.4] ~\\
+	      Increasing the model complexity could maybe bring the training error close or even to zero.
+	      From the analysis of Figure \ref{fig:ex-q1-training-vs-validation} (c.) we can see that
+	      achieving 0 training error is not a good goal, as it would lead to overfitting,
+	      where the model learns the noise patterns in the data.
+	      It is not sufficient to increase model complexity to reduce the structural risk. \newline
+	      The structural risk is defined as a sum of 3 terms: \newline
+	      $\overline{V}(\hat{\theta}) = [\overline{V}(\hat{\theta}) - \overline{V}(\theta^o)]
+		      + [\overline{V}(\theta^o) - V_I]
+		      + V_I$
+
+	      The structural risk represents the model performance in the optimal case
+	      as it describes the generalization abitility of the model,
+	      and shows the discrepancy through loss function $\mathcal{L}$.
+	      Improving the structural risk means bringing each term to 0:
+
+	      \begin{itemize}
+		      \item[] $\overline{V}(\hat{\theta}) - \overline{V}(\theta^o)$
+		            estimation risk can reach 0 if the model family chosen reach the optimal $\theta^o$
+		            coefficient parameters.
+
+		      \item[] $\overline{V}(\theta^o) - V_I$ approximation risk can reach 0
+		            if model family $f(\theta, x)$ exactly approximates the data generating function $g(x)$.
+
+		      \item[] $V_I$ inherent risk can reach 0 if no noise is present in the dataset.
+		            Since uncertainty is inherently present in the every physicl sensor, data always has it.
+	      \end{itemize}
+	      In conclusion, increasing the model complexity could potentially bring the training error to 0
+	      but it is not a good goal
+	      and the structural risk is not reduced by purely increasing model complexity.
 
 	\item[Q1.5] If the X axis represented the training iterations instead,
 	      would you think that the training procedure that generated the figure used early stopping?
-	      Explaib why. (\textbf{NB:} ignore the subfigures and the dashed vertical lines)
-	\item[A1.5] ~\\
+	      Explaib why. (\textbf{NB}: ignore the subfigures and the dashed vertical lines)
 
+	\item[A1.5] ~\\
+	      If early stopping was used, then the plot should have ended when it reached the optimal model
+	      $\theta_m$ according to the validation set in window (b.),
+	      before the validation error started to increase.
+	      Since it reached way far in the training iterations in window (c.),
+	      reaching overfitting of training data and learning noise from it,
+	      we can state that the procedure generating Figure \ref{fig:ex-q1-training-vs-validation}
+	      did not used early stopping regularization technique.
 \end{itemize}
 
 \subsection*{Q2. Linear Regression}
