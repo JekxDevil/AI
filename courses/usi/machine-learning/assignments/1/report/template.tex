@@ -133,12 +133,23 @@ Use the family of models $f(\mathbf{x}, \boldsymbol{\theta}) = \theta_0 + \theta
 %theta_0 + theta_1 * x_1 + theta_2 * x_2 + theta_3 * cos(x_1) + theta_4 * x_2 * x_2 + theta_5 * tanh(x_1)
 
 \begin{itemize}
-	\item [a.] Write in the report the formula of the model substituting parameters $\theta_0, \ldots, \theta_5$ with the estimates you've found:
-	      $$f(\mathbf{x}, \boldsymbol{\theta}) =  \_ + \_ \cdot x_1 + \_ \cdot x_2 + \_ \cdot \cos(x_1) + \_ \cdot x_2 \cdot x_2 + \_ \cdot \tanh(x_1)$$
+	\item [a.] Write in the report the formula of the model substituting parameters
+	      $\theta_0, \ldots, \theta_5$
+	      with the estimates you've found:
+	      $$f(\mathbf{x}, \boldsymbol{\theta})
+		      =  0
+		      + 5.019 \cdot x_1
+		      - 4.000 \cdot x_2
+		      + 6.983 \cdot \cos(x_1)
+		      + 1.997 \cdot x_2 \cdot x_2
+		      - 0.088 \cdot \tanh(x_1)$$
 
+	      The coeff params are estimated until the 3rd decimal place.
 
 	\item [b.] Evaluate the test performance of your model using the mean squared error as performance measure.
-	\item [c.] Implement Lasso Regression, what do you observe? What can you infer about the given family of models?
+
+	\item [c.] Implement Lasso Regression, what do you observe?
+	      What can you infer about the given family of models?
 \end{itemize}
 
 
@@ -196,7 +207,30 @@ You will get extra points if you provide a model of your choice whose test perfo
 	      since it measures the error of the model.
 
 	\item[Q1.2] Explain the behaviours of the curves in each of the three highlighted sections in the figure, namely (a), (b), and (c).
-	\item[A1.2] ~\\
+	\item[A1.2] In Figure \ref{fig:ex-q1-training-vs-validation}:
+	      \begin{itemize}
+		      \item[a.] this is associated with the start of the training process,
+		            when the model is \textit{underfitting} the data, has high bias and low variance.
+		            The model is excessively simple to capture the underlying patterns from the dataset,
+		            that is evident from the high observed training error,
+		            and also the validation error is high as a consequence of the non-generalization of the model
+		            with unseen data from the test set.
+		            Test set and not validation set because there is no model selection process involved.
+		            The model has high bias and low variance at start.
+		            As the model complexity increases, the training error decreases
+		            and the model starts to learn the patterns in the data.
+		            However, the validation error also decreases at the beginning
+		            but after a certain point starts to increase.
+
+		      \item[b.] this window is associated optimal bias-variance tradeoff.
+		            The ideal optimal model complexity $\theta^o$ references the red dotted vertical line,
+		            and the optimal model complexity point according to the validation set $\theta_m$
+		            references the blue dotted line.
+
+
+
+		      \item[c.]
+	      \end{itemize}
 
 	      \begin{itemize}
 		      \item[Q1.2.a] Can you identify any signs of overfitting or underfitting in the plot?
