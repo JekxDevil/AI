@@ -207,43 +207,74 @@ You will get extra points if you provide a model of your choice whose test perfo
 	      since it measures the error of the model.
 
 	\item[Q1.2] Explain the behaviours of the curves in each of the three highlighted sections in the figure, namely (a), (b), and (c).
-	\item[A1.2] In Figure \ref{fig:ex-q1-training-vs-validation}:
+	\item[A1.2] ~\\
+	      In Figure \ref{fig:ex-q1-training-vs-validation}:
 	      \begin{itemize}
-		      \item[a.] this is associated with the start of the training process,
+		      \item[a.] window is associated with the start of the training process,
 		            when the model is \textit{underfitting} the data, has high bias and low variance.
 		            The model is excessively simple to capture the underlying patterns from the dataset,
 		            that is evident from the high observed training error,
 		            and also the validation error is high as a consequence of the non-generalization of the model
 		            with unseen data from the test set.
-		            Test set and not validation set because there is no model selection process involved.
+		            We talk about test set and not validation set
+		            because there is no model selection process involved.
 		            The model has high bias and low variance at start.
 		            As the model complexity increases, the training error decreases
 		            and the model starts to learn the patterns in the data.
-		            However, the validation error also decreases at the beginning
+		            However, the validation error decreases at the beginning
 		            but after a certain point starts to increase.
 
-		      \item[b.] this window is associated optimal bias-variance tradeoff.
-		            The ideal optimal model complexity $\theta^o$ references the red dotted vertical line,
+		      \item[b.] window is associated with the optimal bias-variance tradeoff for a model.
+		            The ideal optimal model complexity $\theta^o$
+		            resulting from the expected test error and the observed training error
+		            references the red dotted vertical line,
 		            and the optimal model complexity point according to the validation set $\theta_m$
+		            resulting from the observed training and validation error
 		            references the blue dotted line.
 
-
-
-		      \item[c.]
+		      \item[c.] window is associated with the erroneous assumptions in the learning procedure,
+		            when the model is \textit{overfitting} the data, has low bias and high variance.
+		            The model is excessively complex to capture the underlying patterns from the dataset,
+		            that is evident from the low observed training error as it started to learn
+		            from the fluctuations of the independent input variables i.e. their variance,
+		            and also the validation error is high as a consequence of the non-generalization
+		            of the model with unseen data from the test set due to the noise learnt.
+		            As the model complexity increases, the training error decreases
+		            and the model starts to learn the noise patterns in the data.
+		            The more you continue once overfitting started, the worse the performance assessment
+		            result will be for the model, as the training error and validation error diverge
+		            in performace metrics.
 	      \end{itemize}
 
 	      \begin{itemize}
 		      \item[Q1.2.a] Can you identify any signs of overfitting or underfitting in the plot?
 		            If yes, explain which sections correspond to which concept.
+
 		      \item[A1.2.a] ~\\
+		            As already vastly explained in previous answer A1.2,
+		            the signs of underfitting are evident in Figure \ref{fig:ex-q1-training-vs-validation}
+		            (a.) at the start of the training process.
+
+		            The signs of overfitting are evident in Figure \ref{fig:ex-q1-training-vs-validation}
+		            (c.) after the optimal model complexity point $\theta^o$,
+		            when the model starts to learn the noise patterns in the data.
 
 		      \item[Q1.2.b] How can you determine the optimal complexity of the model based on the given plot?
+
 		      \item[A1.2.b] ~\\
+		            The optimal complexity of the model can be determined based on
+		            Figure \ref{fig:ex-q1-training-vs-validation}
+		            window (b.) of given plot: between underfitting and overfitting.
+		            Among the two optimal model complexity points $\theta^o$ and $\theta_m$ delimited by their
+		            dotted vertical lines.
+		            Where both the ideal expected test error and the observed validation error are minimized.
 	      \end{itemize}
 
 	\item[Q1.3] Is there any evidence of high approximation risk? Why?
 	      If yes, in which of the below subfigures?
+
 	\item[A1.3] ~\\
+
 
 	\item[Q1.4] Do you think that increasing the model complexity can bring the training error to zero?
 	      And the structural risk?
