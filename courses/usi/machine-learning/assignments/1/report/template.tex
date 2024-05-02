@@ -252,7 +252,11 @@ Comment and compare how the (a.) training error, (b.) test error and (c.) coeffi
 	\item[Q3.3] What is the role of activation functions in feedforward neural networks.
 	\item[A3.3] ~\\
 \end{itemize}
-\subsection*{Q4. Consider the regression problem shown in the picture below and answer each point.}
+
+\subsection*{
+	Q4. Consider the regression problem shown in the picture \ref{fig:ex-q4-regression}
+	below and answer each point.
+}
 
 % \begin{figure}[htbp] %
 % 	\centering
@@ -263,11 +267,32 @@ Comment and compare how the (a.) training error, (b.) test error and (c.) coeffi
 \begin{itemize}
 	\item[Q4.1] Do you think a model of the family f(x, theta) = $\theta_0 + \theta_1 * x_1 + \theta_2 * x_2$ is a good choice for such task? Why?
 
-	\item [A4.1]
+	\item[A4.1] The simple linear model $f(x, \theta)$ would not be a good fit for the data.
+	      It is evident that the data does not follow a linear trend.
+	      The linear model would lead to underfitting where the model is not able
+	      to capture the underlying patterns.
+	      The relationship between the inputs variables
+	      and the dependent output variable seems to be non-linear,
+	      describing a quadratic interaction on both $x_1, x_2$ resulting in a parabolic shape.
+	      A linear relationship among input variables as in $f(x, \theta)$
+	      would not capture the curvature form of the data.
 
 	\item[Q4.2] Do you think using a feed-forward neural network would improve the results?
 
-	\item[A4.2]
+	\item[A4.2] Using an FFNN would be a good choice for this problem task.
+	      It is for sure better than the simple model with linear relationship
+	      between independent input variable $x_1, x_2$
+	      and dependent output variable $f(x, \theta)$.
+	      In general, with FFNNs we can leverage the \textit{Universal Approximation Theorem (1991)}
+	      which states that an FFNN with a single hidden layer containing a finite number of neurons
+	      and a linear ouput neuron can approximate any continuous function
+	      on compact subsets of $\mathbb{R}^n$.
+	      Moreover, FFNN are highly flexible and can approximate virtually any function,
+	      so complex non-linear relationship patterns,
+	      which are hard for linear and polynomial regression,
+	      are handled through the encapsulated abstraction of the neurons in the hidden layer(s).
+		  In this case, the parabolic shape of the data would be captured, 
+		  as FFNN are a common choice for regression tasks with non-linear data.
 
 \end{itemize}
 
