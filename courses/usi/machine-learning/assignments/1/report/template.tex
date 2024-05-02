@@ -173,13 +173,19 @@ You will get extra points if you provide a model of your choice whose test perfo
 \begin{itemize}
 	\item[Q1.1] What is the whole figure about?
 	\item[A1.1] ~\\
-	      The Figure \ref{fig:ex-q1-training-vs-validation} shows a model evaluation plot.
-	      It visualizes:
+	      The Figure \ref{fig:ex-q1-training-vs-validation} shows the bias-variance tradeoff
+	      for a model.
+	      The bias gives errors due to erroneous assumptions in the learning procedure.
+	      In contrast, the variance yields errors due to the sensitivity of the model
+	      to the training set fluctuations i.e. noise in the training dataset.
+	      The dataset has been partitioned into three subsets:
 	      \begin{itemize}
-		      \item training error
-		      \item validation error
-		      \item expected test error
+		      \item training set, assessing training error
+		      \item test set, assessing performance through test error
+		      \item validation set, assessing model selection through validation error
 	      \end{itemize}
+	      It visualizes the relationship between the model complexity and the error metrics.
+	      Model complexity is intended as more hidden layers or neurons in the model.
 
 	\item[Q1.2] Explain the behaviours of the curves in each of the three highlighted sections in the figure, namely (a), (b), and (c).
 	\item[A1.2] ~\\
