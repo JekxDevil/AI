@@ -398,26 +398,54 @@ would change in the following cases:
 	      \myex{
 		      f(x, \theta) &= \theta_0 + \theta_1 \cdot x_1 + \theta_2 \cdot x_2 + \theta_3 \cdot x_3\\
 	      }
-	      Predictors should have a consequence on the dependent output variable $y$.
-	      If that's not the case for $x_3$, then it does not provide any additional information to the model
-	      and it is not useful for the prediction, bringing up noise problems and cause overfitting.
+	      Predictors should have a consequences on the dependent output variable $y$.
+	      If that's not the case for $x_3$,
+	      then it does not provide any additional information to the model
+	      and it is not useful for the prediction,
+	      bringing up noise problems and causing overfitting.
+	      Overall, the model family structure change,
+	      its complexity is higher,
+	      and the new regressor could capture noise fluctuations making worse predictions.
+	      \begin{itemize}
+		      \item[a.] initially, the train error could decrease due to
+		            multicollinearity and noise overfitting
+		      \item[b.] the test could increase as a consequence of overfitting the training dataset
+		            and not generalizing to unseen data
+		      \item[c.] after regression, the independent random variable $x_3$
+		            could either be close or set to 0
+	      \end{itemize}
 
-	      %   The new regressor addition added a random variable independent from the dependent output variable $y$.
-	      %   The model complexity is higher and the model family structure has changed.
-	      %   The new regressor could capture the noise patterns in the data making worse predictions.
-	      %   In windows:
-	      %   \begin{itemize}
-	      %       \item[a.] the train error could increase due to multicollinearity and noise
-	      %       \item[b.] the test error could increase due to multicollinearity and noise
-	      %       \item[c.] the coefficients could be unstable and not unique
-	      %             as the model is learning noise patterns from the random variable
-	      %   \end{itemize}
-
-	\item[Q2.3] How would your answers change if you were using Lasso Regression?
-	\item[A2.3] ~\\
-
-	\item[Q2.4] Explain the motivation behind Ridge and Lasso regression and their principal differences.
+	\item[Q2.4] How would your answers change if you were using Lasso Regression?
 	\item[A2.4] ~\\
+	      \begin{itemize}
+		      \item[Q2.1] since the main problem of $x_3$ is being a linear combination of
+		            $x_1, x_2$ and the multicollinearity it brings
+		            could be solved by Lasso regression
+		            as the regularization mechanism could lower
+		            or even set to 0 the coefficient parameter $\theta_3$ 
+					or the couple $\theta_1, \theta_2$.
+					So, it depends on the relevance of the predictor $x_3$ and the couple
+					$x_1, x_2$ over the dependent output variable $y$. 
+
+		      \item[Q2.2] as the model goes to a higher complexity order with $x_3 = x_1^2$,
+		            the Lasso regression would generally decrease training error
+		            and increase test error.
+		            Since $x_3$ is a non-linear combination of $x_1$,
+		            I would speculate that the coefficient parameter $\theta_3$
+		            of $x_3$ not be set to 0 since $x_1$ is a relevant predictor.
+		            The redundant nature of $x_3$ could probably lead to overfitting since it
+		            amplifies $x_1$ fluctuation noise in the model learning process.
+
+		      \item[Q2.3] the coefficient parameter $\theta_3$ of $x_3$ random variable input
+		            would be set to 0 as Lasso regression purpose is to allow irrelevant predictors
+		            to be set to 0.
+		            The model will then be the same as the original one without $x_3$.
+		            So the expected behavior on (a.), (b.) and (c.)
+		            would be the same as in the original model with $\theta_3 = 0$.
+	      \end{itemize}
+
+	\item[Q2.5] Explain the motivation behind Ridge and Lasso regression and their principal differences.
+	\item[A2.5] ~\\
 \end{itemize}
 
 \subsection*{Q3. Logistic Regression}
