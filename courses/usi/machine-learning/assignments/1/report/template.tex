@@ -144,7 +144,7 @@ Use the family of models $f(\mathbf{x}, \boldsymbol{\theta}) = \theta_0 + \theta
 		      + 1.997 \cdot x_2 \cdot x_2
 		      - 0.088 \cdot \tanh(x_1)$$
 
-	      The coeff params are estimated until the 3rd decimal place.
+	      The coefficient parameters $\hat{\theta}$ are shown until the 3rd decimal place.
 
 	\item [b.] Evaluate the test performance of your model using the mean squared error as performance measure.
 
@@ -513,26 +513,26 @@ would change in the following cases:
 	\item[Q3.2] Discuss the major limit they share and how neural networks can solve it.
 
 	\item[A3.2] ~\\
-		The major limit of both logistic regression and perceptron is the inability 
-		to capture non-linear relationships.
-		The logic within them is to create decision boundaries with hyperplanes.
-		The XOR problem is a classic example where both logistic regression and perceptron fail.
-		Neural networks can solve this problem by using the hidden layers in the model 
-		which are able to capture complex non-linear relationship in data.
+	      The major limit of both logistic regression and perceptron is the inability
+	      to capture non-linear relationships.
+	      The logic within them is to create decision boundaries with hyperplanes.
+	      The XOR problem is a classic example where both logistic regression and perceptron fail.
+	      Neural networks can solve this problem by using the hidden layers in the model
+	      which are able to capture complex non-linear relationship in data.
 
 	\item[Q3.3] What is the role of activation functions in feedforward neural networks.
 
 	\item[A3.3] ~\\
-		  The role of the activation function in FFNN is to determine which neurons should be activated.
-		  Allowing subsets of neurons from the hidden layer to be either activated or not based on the 
-		  activation function, permits the model to learn complex non-linear patterns in the data. 
-		  E.g. the XOR problem becomes solvable.
-		  Continous activation functions e.g. the sigmoidal, 
-		  are typically usually used in the hidden layers of the FFNN to allow
-		  the model to approximate virtually any function, 
-		  as stated by the Universal Approximation Theorem (1991).
-		The activation function is applied to the output of each neuron in the hidden layer(s)
-		and it transforms the input into a non-linear output.
+	      The role of the activation function in FFNN is to determine which neurons should be activated.
+	      Allowing subsets of neurons from the hidden layer to be either activated or not based on the
+	      activation function, permits the model to learn complex non-linear patterns in the data.
+	      E.g. the XOR problem becomes solvable.
+	      Continous activation functions e.g. the sigmoidal,
+	      are typically usually used in the hidden layers of the FFNN to allow
+	      the model to approximate virtually any function,
+	      as stated by the Universal Approximation Theorem (1991).
+	      The activation function is applied to the output of each neuron in the hidden layer(s)
+	      and it transforms the input into a non-linear output.
 \end{itemize}
 
 \subsection*{
