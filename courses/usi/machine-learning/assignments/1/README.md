@@ -14,7 +14,8 @@ To complete the assignment, you must address the tasks below and submit your sol
 
 
 ### T1. Linear Regression
-Use the family of models `f(x, theta) = theta_0 + theta_1 * x_1 + theta_2 * x_2 + theta_3 * cos(x_1) + theta_4 * x_2 * x_2 + theta_5 * tanh(x_1) ` to fit the data (File: **data.npz**):
+Use the family of models `f(x, theta) = theta_0 + theta_1 * x_1 + theta_2 * x_2 + theta_3 * cos(x_1) + theta_4 * x_2 * x_2 + theta_5 * tanh(x_1) ` 
+to fit the data (File: **data.npz**):
 * Write in the report the formula of the model substituting parameters `theta_0, ..., theta_5` with the estimates you've found;
 * Evaluate your model's test performance using the mean squared error as a performance measure.
 * Implement Lasso Regression, what do you observe? What can you infer about the given family of models?
