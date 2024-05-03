@@ -339,16 +339,79 @@ You will get extra points if you provide a model of your choice whose test perfo
 \end{itemize}
 
 \subsection*{Q2. Linear Regression}
-Comment and compare how the (a.) training error, (b.) test error and (c.) coefficients would change in the following cases:
+Comment and compare how the (a.) training error, (b.) test error and (c.) coefficients
+would change in the following cases:
 \begin{itemize}
 	\item[Q2.1] $x_3 = x_1 + 0.2 \cdot x_2$.
+
 	\item[A2.1] ~\\
+	      When adding the regressor to the model family formula
+	      \myex{
+		      f(x, \theta) &= \theta_0 + \theta_1 \cdot x_1 + \theta_2 \cdot x_2 + \theta_3 \cdot x_3\\
+		      &= \theta_0 + \theta_1 \cdot x_1 + \theta_2 \cdot x_2 + \theta_3 \cdot (x_1 + 0.2 \cdot x_2)\\
+		      &= \theta_0 + (\theta_1 + \theta_3) \cdot x_1 + (\theta_2 + 0.2 \cdot \theta_3) \cdot x_2\\
+		      &= \theta_0 + \theta_1' \cdot x_1 + \theta_2' \cdot x_2\\
+	      }
+	      The new regressor addition did not change the model family structure.
+	      Th new feature predictor $x_3$ is a linear combination of $x_1, x_2$,
+	      hence is redundant and increases the multicollinearity in the model.
+	      Such property could lead to overfitting and make the model learn noise patterns.
+	      In windows:
+	      \begin{itemize}
+		      \item[a.] the train error could either remain the same or decrease due to multicollinearity
+		      \item[b.] as consequence of multicollinearity, thus overfitting, the test error could increase
+		      \item[c.] since $\theta_3$ is linear dependent, it lead to multiple solutions
+		            for $\theta_1, \theta_2$ and the coefficients could be unstable and not unique,
+		            as a result of overfitting
+	      \end{itemize}
 
 	\item[Q2.2] $x_3 = x_1 ** 2$ (in Python ** is the "power" operator, so  3 ** 2 = 3 * 3 = 9).
+
 	\item[A2.2] ~\\
+	      When adding the regressor to the model family formula
+	      \myex{
+		      f(x, \theta) &= \theta_0 + \theta_1 \cdot x_1 + \theta_2 \cdot x_2 + \theta_3 \cdot x_3\\
+		      &= \theta_0 + \theta_1 \cdot x_1 + \theta_2 \cdot x_2 + \theta_3 \cdot x_1^2\\
+		      &= \theta_0 + (\theta_1 + \theta_3 \cdot x_1) \cdot x_1 + \theta_2 \cdot x_2\\
+		      &= \theta_0 + \theta_3' \cdot x_1 + \theta_2 \cdot x_2\\
+	      }
+	      The new regressor addition added a non-linear combination of existing features.
+	      The model complexity is higher and the model family structure has changed.
+	      Assuming the relationship between $y$ and predictors is non-linear,
+	      the new regressor could capture the non-linear patterns in the data making better predictions.
+	      If the assumption does not hold, then Occam's razor principle applies,
+	      and the new predictor could decrease overall performance.
+	      In windows:
+	      \begin{itemize}
+		      \item[a.] the train error could decrease if the data is linear, otherwise it could increase
+		      \item[b.] the test error could decrease if the data is linear, otherwise it could increase
+		      \item[c.] the coefficients could be more stable and unique
+		            as the model is able to capture the non-linear patterns.
+		            This depends on regressor relevance, multicollinearity, the relationship linearity among
+		            input independent variables $x_i$ and the dependent output variable $y$.
+	      \end{itemize}
 
 	\item[Q2.3] $x_3$ is a random variable independent from $y$.
+
 	\item[A2.3] ~\\
+	      When adding the regressor to the model family formula
+	      \myex{
+		      f(x, \theta) &= \theta_0 + \theta_1 \cdot x_1 + \theta_2 \cdot x_2 + \theta_3 \cdot x_3\\
+	      }
+	      Predictors should have a consequence on the dependent output variable $y$.
+	      If that's not the case for $x_3$, then it does not provide any additional information to the model
+	      and it is not useful for the prediction, bringing up noise problems and cause overfitting.
+
+	      %   The new regressor addition added a random variable independent from the dependent output variable $y$.
+	      %   The model complexity is higher and the model family structure has changed.
+	      %   The new regressor could capture the noise patterns in the data making worse predictions.
+	      %   In windows:
+	      %   \begin{itemize}
+	      %       \item[a.] the train error could increase due to multicollinearity and noise
+	      %       \item[b.] the test error could increase due to multicollinearity and noise
+	      %       \item[c.] the coefficients could be unstable and not unique
+	      %             as the model is learning noise patterns from the random variable
+	      %   \end{itemize}
 
 	\item[Q2.3] How would your answers change if you were using Lasso Regression?
 	\item[A2.3] ~\\
