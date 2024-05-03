@@ -407,10 +407,10 @@ would change in the following cases:
 	      its complexity is higher,
 	      and the new regressor could capture noise fluctuations making worse predictions.
 	      \begin{itemize}
-		      \item[a.] initially, the train error could decrease due to
-		            multicollinearity and noise overfitting
-		      \item[b.] the test could increase as a consequence of overfitting the training dataset
-		            and not generalizing to unseen data
+		      \item[a.] initially, the train error could decrease
+		            due to multicollinearity and noise overfitting
+		      \item[b.] the test could increase as a consequence
+		            of overfitting  the training dataset and not generalizing to unseen data
 		      \item[c.] after regression, the independent random variable $x_3$
 		            could either be close or set to 0
 	      \end{itemize}
@@ -422,10 +422,10 @@ would change in the following cases:
 		            $x_1, x_2$ and the multicollinearity it brings
 		            could be solved by Lasso regression
 		            as the regularization mechanism could lower
-		            or even set to 0 the coefficient parameter $\theta_3$ 
-					or the couple $\theta_1, \theta_2$.
-					So, it depends on the relevance of the predictor $x_3$ and the couple
-					$x_1, x_2$ over the dependent output variable $y$. 
+		            or even set to 0 the coefficient parameter $\theta_3$
+		            or the couple $\theta_1, \theta_2$.
+		            So, it depends on the relevance of the predictor $x_3$ and the couple
+		            $x_1, x_2$ over the dependent output variable $y$.
 
 		      \item[Q2.2] as the model goes to a higher complexity order with $x_3 = x_1^2$,
 		            the Lasso regression would generally decrease training error
@@ -444,8 +444,44 @@ would change in the following cases:
 		            would be the same as in the original model with $\theta_3 = 0$.
 	      \end{itemize}
 
-	\item[Q2.5] Explain the motivation behind Ridge and Lasso regression and their principal differences.
+	\item[Q2.5] Explain the motivation behind Ridge and Lasso regression
+	      and their principal differences.
+
 	\item[A2.5] ~\\
+	      Both Ridge and Lasso regression are regularization techniques
+	      used to prevent overfitting and improve generalization in linear regression models.
+	      They add a penalty term $\lambda$ to the loss function
+	      to prevent the irrelevant coefficients of feature variables to become too dominant
+	      by setting them either close or to 0.
+	      High values of $\lambda$ lead parameter shriking
+	      i.e. to few relevant parameters in the model.
+	      Small values of $\lambda$ lead to accuracy in parameter values, unaltering the model.
+	      Both of them solve/mitigate multicollinearity in indipendent predictor variable inputs.
+	      Both of them usually implement preprocessing techniques to normalize the input data
+	      and easy the regularization process:
+	      \textit{centering inputs} to have mean 0 and \textit{scaling} them to have unit variance.
+	      With MSE loss function $\mathcal{L} = V_n(\theta)$ for both regression techniques,
+	      ridge regression is defined as:
+	      \myex{
+		      V_{Ridge}(\theta) = V_n(\theta) + \lambda || \theta_i ||^2
+	      }
+	      it penalizes the square of parameters and it solve the rank deficiency problem
+	      for multicollinearity in independent input variables in matrix,
+	      i.e.
+	      \myex{
+		      \exists (X^T X + \lambda I)^{-1} \text{ for } \lambda > 0 \\
+	      }
+
+	      Although, LASSO regression defined as:
+	      \myex{
+		      V_{LASSO}(\theta) = V_n(\theta) + \lambda \sum_{i=2}^{d} | \theta_i |
+	      }
+	      as the interesting property of setting irrelevant parameters to 0,
+	      while ridge cannot set them to 0, but only close.
+	      Such property is due to Lasso penalizing the absolute value of parameters
+	      where the original becomes non-convex and would require quadratic programming
+	      optimization tecniques.
+	      LASSO potentially solves multicollinearity and promotes sparse coefficient solutions.
 \end{itemize}
 
 \subsection*{Q3. Logistic Regression}
