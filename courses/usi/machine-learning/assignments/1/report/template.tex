@@ -492,10 +492,10 @@ would change in the following cases:
 	      The main differences between logistic regression and perceptron are:
 	      \begin{itemize}
 		      \item[] activation function:
-				logistic regression commonly uses a sigmoidal function as its activation function
-				allowing a non-linear decision boundary.
-				Instead, perceptron uses a step function as its activation function which 
-				limits the decision boundary to be linear.
+		            logistic regression commonly uses a sigmoidal function as its activation function
+		            allowing a non-linear decision boundary.
+		            Instead, perceptron uses a step function as its activation function which
+		            limits the decision boundary to be linear.
 
 		      \item[] learning procedure:
 		            logistic regression leverages gradient descent to minimize the loss function
@@ -505,8 +505,7 @@ would change in the following cases:
 
 		      \item[] output probability:
 		            logistic regression yields the estimated probability of the dependent output variable
-		            $y \in C = \{ c_{k \in \mathbb{N}} \}$, where C is the set of classes
-		            for classification tasks.
+		            $y$ for classification tasks.
 		            Instead, the discrete nature of the perceptron output $y \in \{ 0, 1 \}$
 		            is a consequence of the limits in its decision boundary.
 	      \end{itemize}
@@ -514,10 +513,26 @@ would change in the following cases:
 	\item[Q3.2] Discuss the major limit they share and how neural networks can solve it.
 
 	\item[A3.2] ~\\
+		The major limit of both logistic regression and perceptron is the inability 
+		to capture non-linear relationships.
+		The logic within them is to create decision boundaries with hyperplanes.
+		The XOR problem is a classic example where both logistic regression and perceptron fail.
+		Neural networks can solve this problem by using the hidden layers in the model 
+		which are able to capture complex non-linear relationship in data.
 
 	\item[Q3.3] What is the role of activation functions in feedforward neural networks.
 
 	\item[A3.3] ~\\
+		  The role of the activation function in FFNN is to determine which neurons should be activated.
+		  Allowing subsets of neurons from the hidden layer to be either activated or not based on the 
+		  activation function, permits the model to learn complex non-linear patterns in the data. 
+		  E.g. the XOR problem becomes solvable.
+		  Continous activation functions e.g. the sigmoidal, 
+		  are typically usually used in the hidden layers of the FFNN to allow
+		  the model to approximate virtually any function, 
+		  as stated by the Universal Approximation Theorem (1991).
+		The activation function is applied to the output of each neuron in the hidden layer(s)
+		and it transforms the input into a non-linear output.
 \end{itemize}
 
 \subsection*{
