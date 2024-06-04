@@ -2,6 +2,8 @@
 
 # compressed folders for assignment delivery:
 *.zip
+*jeferson_moralesmariciano*
+*:Zone*
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
