@@ -1,5 +1,8 @@
 .idea/
 
+# compressed folders for assignment delivery:
+*.zip
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

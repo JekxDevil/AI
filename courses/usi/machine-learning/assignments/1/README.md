@@ -27,8 +27,13 @@ Consider any family of non-linear models of your choice to address the above reg
 
 ### T3. (Bonus)
 
-In the [GitHub repository of the course](https://github.com/FatimaEzzedinee/ML-bachelor-course-assignments-sp24), you will find a trained torch model that we built using a **new dataset** you are given (**data_bonus**). This _baseline_ model can achieve an MSE of **0.013** when evaluated on the test set.
-You will get extra points if you provide a model of your choice whose test performance is **better** (i.e., the MSE is lower) than ours. Of course, you must also tell us **why** your model is performing better.
+In the [GitHub repository of the course](https://github.com/FatimaEzzedinee/ML-bachelor-course-assignments-sp24), 
+you will find a trained torch model that we built 
+using a **new dataset** you are given (**data_bonus**). 
+This _baseline_ model can achieve an MSE of **0.013** when evaluated on the test set.
+You will get extra points if you provide a model of your choice whose test performance is **better** 
+(i.e., the MSE is lower) than ours. 
+Of course, you must also tell us **why** your model is performing better.
 
 To complete the assignment, you must submit a zip file on the iCorsi platform containing the following:
 

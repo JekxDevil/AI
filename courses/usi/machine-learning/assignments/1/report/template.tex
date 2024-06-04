@@ -147,9 +147,14 @@ Use the family of models $f(\mathbf{x}, \boldsymbol{\theta}) = \theta_0 + \theta
 	      The coefficient parameters $\hat{\theta}$ are shown until the 3rd decimal place.
 
 	\item [b.] Evaluate the test performance of your model using the mean squared error as performance measure.
+	      The test performance of the model is \textbf{1.4662}.
+	      The value is shown until the 4rd decimal place.
 
 	\item [c.] Implement Lasso Regression, what do you observe?
 	      What can you infer about the given family of models?
+	      Lasso is generally worses than the simple linear model,
+	      although by tweaking the hyperparameter $\lambda$ it could be reach
+	      similar results.
 \end{itemize}
 
 
@@ -157,13 +162,28 @@ Use the family of models $f(\mathbf{x}, \boldsymbol{\theta}) = \theta_0 + \theta
 Consider any family of non-linear models of your choice to address the above regression problem.
 \begin{itemize}
 	\item [a.] Evaluate the test performance of your model using the mean squared error as performance measure (same data as Task 1).
+	      The test performance of the model is still \textbf{1.4664}.
+	      The value is shown until the 4rd decimal place.
+
 	\item [b.] Compare your model with the linear regression of Task 1. Which one is {statistically} better?
+	      By doing the statistical comparison I get the following values from the
+	      confront between the square error of the 2 models.
+	      The comparison is in the jupiter notebook.
+	      %   t_statistic = -10.99...,
+	      %   p_value = 7.17... $ \cdot 10^{-27}$
 \end{itemize}
 
 \subsection*{Task 3 (Bonus)}
 In the \href{https://github.com/FatimaEzzedinee/ML-bachelor-course-assignments-sp24}{\textbf{GitHub repository of the course}}, you will find a trained Torch learn model that we built using the same dataset you are given (\textbf{data\_bonus}).
 This \textbf{baseline} model is able to achieve a MSE of \textbf{0.013}, when evaluated on the test set.
 You will get extra points if you provide a model of your choice whose test performance is \textbf{better} (i.e., the MSE is lower) than ours. Of course, you must also tell us why your model is performing better.
+
+The model I built is a Feed Forward Neural Network with 2 hidden layers with
+30 and 13 neurons each, using the sigmoidal and ReLU activation function.
+In general, from the Universal Approximation Theorem (1991),
+FFNNs are able to approximate virtually any function.
+The algorithm quits as soon as it reaches a better test performance than the model
+implemented by the course staff.
 
 %----------------------------------------------------------------------------------------
 %	Questions
