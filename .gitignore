@@ -1,5 +1,7 @@
 .idea/
 
+*.pth
+
 # compressed folders for assignment delivery:
 *.zip
 *jeferson_moralesmariciano*
