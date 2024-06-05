@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "assignment2-jeferson-moralesmariciano"
+version = "0.1.0"
+description = "assignment 2 of machine learning regarding classification"
+authors = ["Jeferson Morales Mariciano <jeferson.morales.mariciano@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.26.4"
+scikit-learn = "^1.4.2"
+torch = "^2.3.0"
+notebook = "^7.1.3"
+pandas = "^2.2.2"
+matplotlib = "^3.8.4"
+seaborn = "^0.13.2"
+torchvision = "^0.18.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

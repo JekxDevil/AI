@@ -10,7 +10,7 @@ Both requests are very similar to what we have seen during the labs. However, yo
 Make sure to motivate **all** your choices, parameters, losses and answers.
 Once completed, please submit your solution on the iCorsi platform following the instructions below. 
 
-It is **Highly** recommended to google colab GPUs, or you will have RAMS problems.
+It is **Highly** recommended to use Google colab GPUs, or you will have RAMs problems.
 
 ## Tasks
 
@@ -21,7 +21,7 @@ You are provided with Torch dataset class called Dataset, you can use it.
 
 1. Download and load the dataset using the following link 'https://drive.switch.ch/index.php/s/XSnhQDNar7y46oQ'. The dataset consist of 6 classes with a folder for each class images. The classes are 'CHEETAH' ,'OCELOT', 'CARACAL', 'LIONS', 'PUMA', 'TIGER'. Check Cell 1 in `example.ipynb` to find the ready and implemented function to load the dataset. 
 2. Preprocess the data:
-    - Normalize each pixel of each channel so that the range is [0, 1], by applying the min-max normlaization (division by 255);
+    - Normalize each pixel of each channel so that the range is [0, 1], by applying the min-max normalization (division by 255);
     - One hot encode the labels (the y variable)
 3. Flatten the images into 1D vectors. You can achieve that by using [torch.reshape](https://pytorch.org/docs/stable/generated/torch.reshape.html) or by prepending a [Flatten layer](https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html) to your architecture; if you follow this approach this layer will not count for the rules at point 4.
 4. Build a Feed Forward Neural Network of your choice, following these constraints:
@@ -90,7 +90,7 @@ In order to complete the assignment, you must submit a zip file named `as2_surna
 
 1. A report in `.pdf` format containing the plots and comments of the two tasks. You can use the `.tex` source code provided in the repo (not mandatory).
 2. The best models you find for both the tasks (one for the first task, one or two for the second task, in case you completed the bonus point). By default, the torch function to save the model outputs a folder with several files inside. If you prefer a more compact solution, just append `.pt` or `.pth` at the end of the name you use to save the model to end up with a single file.
-3. A working example for T1, T2 and T3 `tasks.ipynb` that loads the dataset, preprocesses the data, loads the trained model from file. Note that the notebook should contain a maximum of 7 cells and each cell shou be run independatly from the other cells.
+3. A working example for T1, T2 and T3 `tasks.ipynb` that loads the dataset, preprocesses the data, loads the trained model from file. Note that the notebook should contain a maximum of 7 cells and each cell should be run independently of the other cells.
  - 1 cell for loading the data (already given)
  - 1 cell for task 1
  - 1 cell for task 1 bonus (if any)
