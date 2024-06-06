@@ -226,6 +226,12 @@ which is exactly the desired behavior.
 
 The training loop implemented follows a similar pattern provided by PyTorch documentation.
 
+The seed is passed to the functions 
+\pyth{train_test_split(..., random_state=...)}
+and set initially to 
+\pyth{np.random.seed(), torch.manual_seed()}
+to ensure the reproducibility of the results.
+
 \subsection*{6}
 
 In Figure (\ref{fig:task1}), 
