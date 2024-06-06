@@ -10,7 +10,7 @@
 %	INSERT HERE YOUR NAME
 %----------------------------------------------------------------------------------------
 
-\student{Morales Mariciano Jeferson}
+\student{Morale Mariciano Jeferson}
 
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
@@ -27,7 +27,7 @@
 \usepackage{amsmath, amsfonts} % Math packages
 \usepackage{listings} % Code listings, with syntax highlighting
 \usepackage{graphicx} % Required for inserting images
-\graphicspath{{Figures/}{./}} % Specifies where to look for included images (trailing slash required)
+\graphicspath{{Figures/}{./}} % where to look for included images (trailing slash required)
 \usepackage{float}
 
 %----------------------------------------------------------------------------------------
@@ -88,21 +88,23 @@
 
 \maketitle
 
-Please refer to the \textbf{ReadMe} file to get the exact all questions. This is just a template of how your report should look like.
+Please refer to the \textbf{ReadMe} file to get the exact all questions. 
+This is just a template of how your report should look like.
 In this assignment, you are asked to:
 
 \begin{enumerate}
-\item Implement a fully connected feed-forward neural network to classify images from the \textbf{Cats of the Wild} dataset.
+\item Implement a fully connected feed-forward neural network to classify images 
+from the \textbf{Cats of the Wild} dataset.
 
-\item Implement a convolutional neural network to classify images of \textbf{Cats of the Wild} dataset.
+\item Implement a convolutional neural network to classify images of 
+\textbf{Cats of the Wild} dataset.
 
 \item Implement transfer learning.
-
 \end{enumerate}
 
 
-
-Both requests are very similar to what we have seen during the labs. However, you are required to follow \textbf{exactly} the assignment's specifications.
+Both requests are very similar to what we have seen during the labs. 
+However, you are required to follow \textbf{exactly} the assignment's specifications.
 
 %----------------------------------------------------------------------------------------
 %	Task 1
@@ -112,12 +114,23 @@ Both requests are very similar to what we have seen during the labs. However, yo
 In this task, you will try and build a classifier for the provided dataset. This task, you will build a classic Feed Forward Neural Network.
 
 \begin{enumerate}
-\item Download and load the dataset using the following \href{https://drive.switch.ch/index.php/s/XSnhQDNar7y46oQ}{link}.  The dataset consist of 7 classes with a folder for each class images. The classes are 'CHEETAH' ,'OCELOT', 'SNOW LEOPARD', 'CARACAL', 'LIONS', 'PUMA', 'TIGER'. Check Cell 1 in 'example.ipynb' to find the ready and implemented function to load the dataset. 
+\item Download and load the dataset using the following 
+\href{https://drive.switch.ch/index.php/s/XSnhQDNar7y46oQ}{link}.  
+The dataset consist of 7 classes with a folder for each class images. 
+The classes are 'CHEETAH' ,'OCELOT', 'SNOW LEOPARD', 'CARACAL', 'LIONS', 'PUMA', 'TIGER'. 
+Check Cell 1 in 'example.ipynb' to find the ready and implemented function to load the dataset. 
 
 \item Preprocess the data: normalize each pixel of each channel so that the range is [0, 1].
+
 \item One hot encode the labels (the y variable).
 
-\item Flatten the images into 1D vectors. You can achieve that by using \href{https://pytorch.org/docs/stable/generated/torch.reshape.html}{[torch.reshape]} or by prepending a \href{https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html}{[Flatten layer]} to your architecture; if you follow this approach this layer will not count for the rules at point 5.
+\item Flatten the images into 1D vectors. 
+You can achieve that by using 
+\href{https://pytorch.org/docs/stable/generated/torch.reshape.html}{[torch.reshape]} 
+or by prepending a 
+\href{https://pytorch.org/docs/stable/generated/torch.nn.Flatten.html}{[Flatten layer]} 
+to your architecture; 
+if you follow this approach this layer will not count for the rules at point 5.
 
 \item Build a Feed Forward Neural Network of your choice, following these constraints:
 \begin{itemize}
@@ -126,55 +139,218 @@ In this task, you will try and build a classifier for the provided dataset. This
 	\item Use ReLU activation for all layers other than the output one.
 \end{itemize}
 
-\item Draw a plot with epochs on the x-axis and with two graphs: the train accuracy and the validation accuracy (remember to add a legend to distinguish the two graphs!).
-\item Assess and comment on the performances of the network on your test set, and provide an estimate of the classification accuracy that you expect on new and unseen images. 
-\item \textbf{Bonus} (Optional) Train your architecture of choice (you are allowed to change the input layer dimensionality!) following the same procedure as above, but, instead of the flattened images, use any feature of your choice as input. 
-You can think of these extracted features as a conceptual equivalent of the Polynomial Features you saw in Regression problems, where the input data were 1D vectors. 
-Remember that images are just 3D tensors (HxWxC) where the first two dimensions are the Height and Width of the image and the last dimension represents the channels (usually 3 for RGB images, one for red, one for green and one for blue). 
+\item Draw a plot with epochs on the x-axis and with two graphs: 
+the train accuracy and the validation accuracy 
+(remember to add a legend to distinguish the two graphs!).
+
+\item Assess and comment on the performances of the network on your test set, 
+and provide an estimate of the classification accuracy that you expect on new and unseen images. 
+\item \textbf{Bonus} (Optional) 
+Train your architecture of choice 
+(you are allowed to change the input layer dimensionality!) 
+following the same procedure as above, but, instead of the flattened images, 
+use any feature of your choice as input. 
+You can think of these extracted features as a conceptual equivalent of the Polynomial Features 
+you saw in Regression problems, where the input data were 1D vectors. 
+Remember that images are just 3D tensors (HxWxC) 
+where the first two dimensions are the Height and Width of the image 
+and the last dimension represents the channels 
+(usually 3 for RGB images, one for red, one for green and one for blue). 
 You can compute functions of these data as you would for any multi-dimensional array. 
 A few examples of features that can be extracted from images are:
+
 \begin{itemize}
 	\item Mean and variance over the whole image.
 	\item Mean and variance for each channel.
 	\item Max and min values over the whole image.
 	\item Max and min values for each channel.
 	\item Ratios between statistics of different channels (e.g. Max Red / Max Blue)
-	\item \href{https://en.wikipedia.org/wiki/Image_histogram}{Image Histogram} (Can be compute directly by temporarely converting to numpy arrays and using \href{https://numpy.org/doc/stable/reference/generated/numpy.histogram.html}{np.histogram})
+	\item \href{https://en.wikipedia.org/wiki/Image_histogram}{Image Histogram} 
+	(Can be compute directly by temporarely converting to numpy arrays and using 
+	\href{https://numpy.org/doc/stable/reference/generated/numpy.histogram.html}{np.histogram})
 \end{itemize}
+
 But you can use anything that you think may carry useful information to classify an image.
 
-\textbf{N.B.} If you carry out point 7 also consider the obtained model and results in the discussion of point 6.
+\textbf{N.B.} 
+If you carry out point 7 also consider the obtained model 
+and results in the discussion of point 6.
 \end{enumerate}
 
-\newpage
 
+\subsection*{Reasoning}
+
+Every answer provided first depict the overall plain result.
+Then, prompts the analytical data that lead to such result.
+In addition, a theoretical motivation for the outcomes is given.
+Finally, some metaphors are provided by me for the best I could approximate such concepts 
+to how humans behave and interact with nature, 
+in order to ease the understanding of these concepts. 
+
+
+\subsection*{Apparatus and Configuration}
+
+The jupyter notebook was developed using the following configurations in order to 
+produce the most deterministic outcome at every new run.
+
+Apparatus description:
+
+\begin{itemize}
+	\item \textbf{CPU} Ryzen 3900XT
+	\item \textbf{GPU} RTX 3070 8GB VRAM
+	\item \textbf{CUDA} enabled
+	\item \textbf{RAM} 16 GB 
+	\item \textbf{OS} Windows 11 Pro 23H2
+\end{itemize}
+
+The first scratch of the assigment was developed on Kaggle, were the only hardware specs 
+provided were a python environment in a notebook with a NVIDIA P100 GPU dedicated to the task,
+CUDA enabled during training.
+
+the configuration description for the training and assignment overall are:
+
+\begin{itemize}
+	\item \textbf{seed} 20020309 
+\end{itemize}
+
+The reason of using CrossEntropy as \textbf{loss function} from pytorch is that the 
+module implements both CrossEntropy and SoftMax at every layer but the last output layer,
+which is exactly the desired behavior.
+
+The training loop implemented follows a similar pattern provided by PyTorch documentation.
+
+\subsection*{6}
+
+In Figure (\ref{fig:task1}), 
+I provide the plot with epochs on the x-axis where two graphs are plotted:
+the train and test accuracies.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{./figures/task1.png}
+%     \caption{Train \& test accuracies for FFNN}
+%     \label{fig:task1}
+% \end{figure}
+
+\subsection*{7}
+
+Overall, after assessing the performances of the network on the unseen validation set
+the model is realiable in estimating the classification of the images with
+a best accuracy slightly lower XXX than the one on the test set,
+and the average of the accuracies are around XXX,
+with a variance of XXX.
+
+The delusional result is due to the nature of Feed Forward Neural Network:
+the learning is focused on pixel per pixel,
+while a desired and more useful approach would be the ones resembling human interaction,
+i.e. a broad overview of the whole image,
+analyzing it at chunks.
+
+As it is difficult for us to spot an image from a puzzle piece,
+the FFNN has a metaphorically resembling trouble.
+
+For us humans, if we might be able to immediately recognize a person (macro-concept) 
+from its smile (micro-concept).
+A similar concept is the key to improve the results 
+and lead to the CNN model approach in Task 2.
+
+
+\subsection*{8 BONUS}
+
+The bonus was completed using the mean and average for each RGB channel.
+The results thought show a similar slightly lower accuracy value during training.
+The validation results highlighting XXX with variance of XXX.
+I would have like to put more features in order to get a better model.
+
+The statistical comparison with the FFNN model without features yield 
+the following results:
+there XXXXX statistical significantly difference with the \( p-value = 0.05 \).
+The best result is yild by model XXXXX with best accuracy XXXX and variance of XXXX.
+
+It suffers from the same disadvantages from FFNN discussed previously,
+so the improvement is sadly bounded by the model nature.
+
+\newpage
 %----------------------------------------------------------------------------------------
 %	Task 2
 %----------------------------------------------------------------------------------------
 
 \section{Image Classification with Convolutional Neural Networks (CNN)}
 
-Implement a multi-class classifier (CNN model) to identify the class of the images: 'CHEETAH' ,'OCELOT', 'SNOW LEOPARD', 'CARACAL', 'LIONS', 'PUMA', 'TIGER'.
+Implement a multi-class classifier (CNN model) to identify the class of the images: 
+'CHEETAH' ,'OCELOT', 'SNOW LEOPARD', 'CARACAL', 'LIONS', 'PUMA', 'TIGER'.
 
 \begin{enumerate}
 \item Follow steps 1 and 2 from T1 to prepare the data.
+
 \item Build a CNN of your choice, following these constraints: 
-\begin{itemize}
-\item use 3 convolutional layers.
-\item use 3 pooling layers.
-\item use 3 dense layers (output layer included).
-\end{itemize}
+
+	\begin{itemize}
+	\item use 3 convolutional layers.
+	\item use 3 pooling layers.
+	\item use 3 dense layers (output layer included).
+	\end{itemize}
+
 \item Train and validate your model. Choose the right optimizer and loss function. 
+
 \item Follow steps 5 and 6 of T1 to assess performance.
-\item Qualitatively and \textbf{statistically} compare the results obtained in T1 with the ones obtained in T2. Explain what you think the motivations for the difference in performance may be.
-\item \textbf{Bonus} (Optional) Tune the model hyper-parameters with a \textbf{grid search} to improve the performances (if feasible).
-\begin{itemize}
-\item Perform a grid search on the chosen ranges based on hold-out cross-validation in the training set and identify the most promising hyper-parameter setup.
-\item Compare the accuracy on the test set achieved by the most promising configuration with that of the model obtained in point 4. Are the accuracy levels \textbf{statistically} different?
-\end{itemize}
+
+\item Qualitatively and \textbf{statistically} compare the results 
+obtained in T1 with the ones obtained in T2. 
+Explain what you think the motivations for the difference in performance may be.
+
+\item \textbf{Bonus} (Optional) 
+Tune the model hyper-parameters with a \textbf{grid search} 
+to improve the performances (if feasible).
+
+	\begin{itemize}
+	\item Perform a grid search on the chosen ranges based on hold-out cross-validation 
+	in the training set and identify the most promising hyper-parameter setup.
+
+	\item Compare the accuracy on the test set achieved by the most promising configuration 
+	with that of the model obtained in point 4. 
+	Are the accuracy levels \textbf{statistically} different?
+	\end{itemize}
 \end{enumerate}
 
+\subsection*{3}
+
+The following train parameters were chosen for the model.
+The Optmizer chosen is XXXX because XXXX.
+The loss function used is the CrossEntropyLoss function, 
+which fits the categorical nature of the classification problem.
+
+
+\subsection*{4}
+
+Overall, after assessing the performances of the network on the unseen validation set
+the model is realiable in estimating the classification of the images with
+a best accuracy slightly lower XXX than the one on the test set,
+and the average of the accuracies are around XXX,
+with a variance of XXX.
+
+\subsection*{5}
+
+The statistical comparison between the simple FFNN and the current CNN model yield 
+the following results:
+there XXXXX statistical significantly difference with the \( p-value = 0.05 \).
+The best result is yild by model XXXXX with best accuracy XXXX and variance of XXXX.
+
+\subsection*{6 BONUS}
+
+For the grid search I choose to change the following hyperparameters:
+\begin{itemize}
+	\item[1] Learning rate: [0.001, 0.01, 0.1]
+	\item[2] Batch size: [32, 64, 128]
+	% \item[3] Optimizer: [Adam, SGD]
+\end{itemize}
+
+The epochs were fixed at 100 as defined in configuration.
+
 \newpage
+%----------------------------------------------------------------------------------------
+%	Task 3
+%----------------------------------------------------------------------------------------
 \section{Transfer Learning}
 
 This task involves loading the VGG19 model from PyTorch, applying transfer learning, and experimenting with different model cuts. The VGG19 architecture have 19 layers grouped into 5 blocks, comprising 16 convolutional layers followed by 3 fully-connected layers. Its success in achieving strong performance on various image classification benchmarks makes it a well-known model.
@@ -193,12 +369,12 @@ implement the \_\_init\_\_ and forward functions to accommodate these two cuts:
     
 Note after each cut take the activation function and the pooling layer associated with the convolution layer on the cut
 
-%\begin{figure}[th]
-%\centering
-%\includegraphics[scale=0.35]{VGG19-Ass2.png}
-%\caption{Cuts}
-%\label{fig:scenario}
-%\end{figure}
+% \begin{figure}[th]
+% \centering
+% \includegraphics[scale=0.35]{VGG19-Ass2.png}
+% \caption{Cuts}
+% \label{fig:scenario}
+% \end{figure}
 \end{itemize}
 
 \item In both cases, after the cut, add a sequence of layers (of your choice) with appropriate activation functions, leading to a final output layer with the desired number of neurons for your classification task.
