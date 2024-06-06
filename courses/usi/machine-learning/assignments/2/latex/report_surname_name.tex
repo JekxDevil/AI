@@ -27,8 +27,10 @@
 \usepackage{amsmath, amsfonts} % Math packages
 \usepackage{listings} % Code listings, with syntax highlighting
 \usepackage{graphicx} % Required for inserting images
-\graphicspath{{Figures/}{./}} % where to look for included images (trailing slash required)
+\graphicspath{{Figures/}{./figures/}} % where to look for included images (trailing slash required)
 \usepackage{float}
+\usepackage{pythonhighlight}
+
 
 %----------------------------------------------------------------------------------------
 %	DOCUMENT MARGINS
@@ -198,7 +200,6 @@ Apparatus description:
 \begin{itemize}
 	\item \textbf{CPU} Ryzen 3900XT
 	\item \textbf{GPU} RTX 3070 8GB VRAM
-	\item \textbf{CUDA} enabled
 	\item \textbf{RAM} 16 GB 
 	\item \textbf{OS} Windows 11 Pro 23H2
 \end{itemize}
@@ -211,6 +212,12 @@ the configuration description for the training and assignment overall are:
 
 \begin{itemize}
 	\item \textbf{seed} 20020309 
+	\item \textbf{learning rate} 0.001
+	\item \textbf{batch size}
+	\item \textbf{cuda} enabled
+	\item \textbf{epochs} 101
+	\item \textbf{loss function} cross entropy 
+	\item \textbf{optimizer} Adam
 \end{itemize}
 
 The reason of using CrossEntropy as \textbf{loss function} from pytorch is that the 
@@ -347,43 +354,160 @@ For the grid search I choose to change the following hyperparameters:
 
 The epochs were fixed at 100 as defined in configuration.
 
+The results of such grid search yield me a model with peak test accuracy of
+\( 62.09 \% \)
+with the following best parameters:
+
+\begin{itemize}
+	\item batch size = 64
+	\item learning rate = 0.001
+	\item epochs = 100
+\end{itemize}
+
+
 \newpage
 %----------------------------------------------------------------------------------------
 %	Task 3
 %----------------------------------------------------------------------------------------
 \section{Transfer Learning}
 
-This task involves loading the VGG19 model from PyTorch, applying transfer learning, and experimenting with different model cuts. The VGG19 architecture have 19 layers grouped into 5 blocks, comprising 16 convolutional layers followed by 3 fully-connected layers. Its success in achieving strong performance on various image classification benchmarks makes it a well-known model.
+This task involves loading the VGG19 model from PyTorch, 
+applying transfer learning, and experimenting with different model cuts. 
+The VGG19 architecture have 19 layers grouped into 5 blocks, 
+comprising 16 convolutional layers followed by 3 fully-connected layers. 
+Its success in achieving strong performance on various image classification benchmarks 
+makes it a well-known model.
 
-Your task is to apply transfer learning with a pre-trained VGG19 model. A code snippet that loads the VGG19 model from PyTorch is provided. You'll be responsible for completing the remaining code sections (marked as TODO). Specifically:
+Your task is to apply transfer learning with a pre-trained VGG19 model. 
+A code snippet that loads the VGG19 model from PyTorch is provided. 
+You'll be responsible for completing the remaining code sections (marked as TODO). 
+Specifically:
 
 \begin{enumerate}
-    \item The provided code snippet sets param.requires\_grad = False for the pre-trained VGG19 model's parameters. Can you explain the purpose of this step in the context of transfer learning and fine-tuning? Will the weights of the pre-trained VGG19 model be updated during transfer learning training?
+    \item The provided code snippet sets param.requires\_grad = False 
+	for the pre-trained VGG19 model's parameters. 
+	Can you explain the purpose of this step in the context of transfer learning and fine-tuning? 
+	Will the weights of the pre-trained VGG19 model be updated during transfer learning training?
 
-    \item We want to transfer learning with a pre-trained VGG19 model for our specific classification task. The code has sections for \_\_init\_\_ and forward functions but needs to be completed to incorporate two different "cuts" from the VGG19 architecture. After each cut, additional linear layers are needed for classification (similar to Block 6 of VGG19).
-implement the \_\_init\_\_ and forward functions to accommodate these two cuts:
-\begin{itemize}
-    \item This cut should take the pre-trained layers up to and including the 11th convolution layer (Block 4).
+    \item We want to transfer learning with a pre-trained VGG19 model 
+	for our specific classification task. The code has sections for \_\_init\_\_ 
+	and forward functions but needs to be completed to incorporate two different "cuts" 
+	from the VGG19 architecture. 
+	After each cut, additional linear layers are needed for classification 
+	(similar to Block 6 of VGG19).
+	Implement the \_\_init\_\_ and forward functions to accommodate these two cuts:
 
-    \item Cut 2: This cut should use all the convolutional layers from the pre-trained VGG19 model (up to Block 5).
-    
-Note after each cut take the activation function and the pooling layer associated with the convolution layer on the cut
+	\begin{itemize}
+		\item This cut should take the pre-trained layers up to 
+		and including the 11th convolution layer (Block 4).
 
-% \begin{figure}[th]
-% \centering
-% \includegraphics[scale=0.35]{VGG19-Ass2.png}
-% \caption{Cuts}
-% \label{fig:scenario}
-% \end{figure}
-\end{itemize}
+		\item Cut 2: This cut should use all the convolutional layers 
+		from the pre-trained VGG19 model (up to Block 5).
+		
+		Note after each cut take the activation function and the pooling layer 
+		associated with the convolution layer on the cut
 
-\item In both cases, after the cut, add a sequence of layers (of your choice) with appropriate activation functions, leading to a final output layer with the desired number of neurons for your classification task.
-Train the two models (one with Cut 1 and another with Cut 2) on your chosen dataset. Once training is complete, compare their performance statistically.
+		\begin{figure}[th]
+			\centering
+			\includegraphics[scale=0.33]{cuts.png}
+			\caption{Cuts in VGG19}
+			\label{fig:model-vgg19}
+		\end{figure}
+	\end{itemize}
 
-\item Based on the performance comparison, discuss any observed differences between the two models. What could be the potential reasons behind these results?
+	\item In both cases, after the cut, add a sequence of layers (of your choice) 
+	with appropriate activation functions, leading to a final output layer 
+	with the desired number of neurons for your classification task.
+	Train the two models (one with Cut 1 and another with Cut 2) on your chosen dataset. 
+	Once training is complete, compare their performance statistically.
 
-\item BONUS (optional): Try different cuts in each block of VGG19, and plot one single figure with all the train-validation-test accuracies. Explain in detail the reasons behind the variation of results you get.
+	\item Based on the performance comparison, 
+	discuss any observed differences between the two models. 
+	What could be the potential reasons behind these results?
+
+	\item BONUS (optional): Try different cuts in each block of VGG19, 
+	and plot one single figure with all the train-validation-test accuracies. 
+	Explain in detail the reasons behind the variation of results you get.
 \end{enumerate}
 
+
+\subsection*{1}
+
+Within the context of transfer learning, the model VGG19 from PyTorch 
+is loaded with the architecture and weights of a pre-trained model.
+The purpose of setting \pyth{param.requires_grad = False} 
+is to \textbf{freeze the weights} of the model,
+so that the model does not update the weights during the training of the new model.
+In fact, it would not make sense to update the weights of the pre-trained model
+in the context of transfer learning.
+Particularly, transfer learning is a tecnique where a model for one task,
+in this case the VGG19 for image classification, 
+is reused as the starting point for a model on a second task,
+where the fine tuning to train the model over our feline dataset happens.
+Hence, during transfer learning traning, 
+the weights of the pre-trained VGG19 will XXX be updated.
+
+
+\subsection*{2}
+
+To select the first cut, we need to from the firt feature children of the 
+VGG19 architecture to index 25, in order to get the 11th convolution layer 
+and its activation function and pooling layers associated.
+The correctness can be easily checked thanks to the already templated 
+\pyth{print(self.features)}
+after the cut, so you will see all the requirements satisfied.
+
+For the second cut, we trivially load all the features from the model.
+
+
+\subsection*{3}
+
+For fine tuning we put also a sequence of 3 linear layers 
+with relu activation function complementing 
+with a dropout strategy to try to avoid overfitting.
+The number of neuron were 128 in both input and hidden, 
+ending with an output correspoding to our cat types in the dataset, i.e. 6.
+
+The statistical comparison 
+between the cut1 and the cut2 pre-trained and fine-tuned models yield 
+the following results:
+there XXXXX statistical significantly difference with the \( p-value = 0.05 \).
+The best result is yield by model XXXXX with best accuracy XXXX and variance of XXXX.
+
+
+\subsection*{4}
+
+Based on the performance comparison, 
+the reason why the cut 2 performs significantly better than cut 1
+lies within the transfer learning of the VGG19 itself:
+its architecture is meant to be used XXXX.
+
+Hence, the potential reason of the lower accuracy for cut 1 
+woud be indeed in the difference of XXX.
+
+\subsection*{5 BONUS}
+
+For the bonus part, I arbitrarly chose the following different cuts among the blocks
+of the VGG19 model:
+
+\begin{itemize}
+	\item \textbf{Cut A} XXX
+	\item \textbf{Cut B} XXX
+	\item \textbf{Cut C} XXX
+\end{itemize}
+
+In Figure (\ref{fig:task3-bonus-plot}), 
+the result plot of the train-test-validation of accuracies is showcased.
+
+\begin{figure}[th]
+	\centering
+	\includegraphics[scale=0.33]{cuts.png}
+	\caption{train-test-validation accuracies plot}
+	\label{fig:task3-bonus-plot}
+\end{figure}
+
+The reason behind such variation of results leads to a stronger 
+support of the previously mentioned difference between cut1 and cut2:
+XXXXXX.
 
 \end{document}
