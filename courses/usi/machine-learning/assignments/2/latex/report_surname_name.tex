@@ -10,7 +10,7 @@
 %	INSERT HERE YOUR NAME
 %----------------------------------------------------------------------------------------
 
-\student{Morale Mariciano Jeferson}
+\student{Morales Mariciano Jeferson}
 
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
@@ -480,7 +480,7 @@ Overall, after assessing the performances of the network on the same unseen test
 the model is estimating the classification of the images with an accuracy of 65.47\%, 
 slightly lower than the best one on the validation set.
 The variance of the accuracy is 34.85, and to complement, the loss averaged is 2.2034.
-The overfitting phenomenon is clearly present after the 11th epoch,
+The \textbf{overfitting} phenomenon is clearly present after the 11th epoch,
 where the validation accuracy starts to decrease while the training accuracy peaks to 100.
 The model performs better than the odds of a coin flip!
 
@@ -649,7 +649,7 @@ with the following best parameters:
 \end{itemize}
 
 In Table (\ref{tab:task2-bonus-accuracy}), the accuracy along the epochs is shown.
-The data shows an overfitting phenomenon after the 21st epoch,
+The data shows an \textbf{overfitting} phenomenon after the 21st epoch,
 where the validation accuracy starts to decrease while the training accuracy peaks to 100.
 This model has an accuracy of 60.43\%, 
 slightly less accuracy the the previous simple CNN model of Task 2 of 65.47\%.
@@ -660,6 +660,9 @@ Even the peak validation accuracy is less than the one from the simple CNN model
 By performing a statistical comparison with the same settings as the previous ones,
 the results yield that there is \textbf{no statistical significantly difference}
 between the simple CNN model from Task 2 and the current grid searched CNN model.
+In fact, the resulted best statistical parameters are the same configuration choosen 
+to train the simple CNN model from Task 2:
+the 2 model have equivalent initial hyperparameters!
 
 \begin{table}[htbp]
 \centering
@@ -759,7 +762,7 @@ Within the context of transfer learning, the model VGG19 from PyTorch
 is loaded with the architecture and weights of a pre-trained model.
 The purpose of setting \pyth{param.requires_grad = False} 
 is to \textbf{freeze the weights} of the model,
-so that the model does not update the weights during the training of the new model.
+so that it does not update the weights during the training of the new model.
 In fact, it would not make sense to update the weights of the pre-trained model
 in the context of transfer learning.
 Particularly, transfer learning is a tecnique where a model for one task,
@@ -767,7 +770,7 @@ in this case the VGG19 for image classification,
 is reused as the starting point for a model on a second task,
 where the fine tuning to train the model over our feline dataset happens.
 Hence, during transfer learning traning, 
-the weights of the pre-trained VGG19 will XXX be updated.
+the weights of the pre-trained VGG19 will not be updated.
 
 
 \subsection*{2}
@@ -786,27 +789,32 @@ For the second cut, we trivially load all the features from the model.
 
 For fine tuning we put also a sequence of 3 linear layers 
 with relu activation function complementing 
-with a dropout strategy to try to avoid overfitting.
-Starting from flattened image size on the VGG19,
-for which I wrote a dummy input in the constructor to retrieve what would be the
-flatten image after the features of the pre-trained model up to its 11th convolution
-layer and its associated activation functions and pools for cut1.
-The number of neuron in the added sequence of layers were 256 and 128, 
-ending with an output correspoding to our cat types in the dataset, i.e. 6.
+a dropout strategy to try to avoid \textbf{overfitting}.
+In the constructor I put a dummy input to retrieve the flatten image
+size to feed to the first linear layer as input:
+its purpose is to simulate what happens in the forward function
+where the features are used on param \pyth{x},
+then \pyth{x} is flattened and passed to the linear layers
+through our classifiers for fine tuning.
+The number of neurons in the added sequence of layers were 256 and 128, 
+ending with an output correspoding to our cat types in the dataset, i.e. 6
+(\underline{errata corrige put near written dataset specifications for the missing 'SNOW LEOPARD'}).
 
 In Table (\ref{tab:task3-cut1-accuracy}),
-the accuracy along the epochs is shown.
+the accuracy of Cut 1 along the epochs is shown.
 
 In Figure (\ref{fig:task3-cut1-accuracy}), 
-I provide the plot with epochs on the x-axis where two graphs are plotted:
+I provide the plot for Cut 1 with epochs on the x-axis where two graphs are plotted:
 the train and validation accuracies.
 The context is the one from the previous Table (\ref{tab:task3-cut1-accuracy}). 
 
-Overall, after assessing the performances of the network on the unseen test set
+Overall, after assessing the performances of the network on the same unseen test set,
 the model is realiable in estimating the classification of the images with
-a best accuracy slightly lower XXX than the one on the validation set,
-and the average of the accuracies are around XXX,
-with a variance of XXX.
+an accuracy of 87.77\%, slightly lower than the best one on the validation set.
+The variance of the test accuracy is 5.77,
+with seems to be reasonable and sufficiently reliable for the classification task.
+To complement, the test loss averaged is 0.35.
+The odds are better than the ones from the augmented CNN model from Task 2 Bonus!
 
 \begin{table}[htbp]
 \centering
@@ -815,19 +823,19 @@ with a variance of XXX.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 33.79 & 71.84 \\
-11   & 67.66 & 79.42 \\
-21   & 78.77 & 85.20 \\
-31   & 81.93 & 83.03 \\
-41   & 82.84 & 81.95 \\
-51   & 84.10 & 83.75 \\
-61   & 85.00 & 83.75 \\
-71   & 87.08 & 87.00 \\
-81   & 86.54 & 83.75 \\
-91   & 85.82 & 84.84 \\
-101  & 86.27 & 89.53 \\
+1    & 30.17  & 65.94 \\
+11   & 68.02  & 74.64 \\
+21   & 78.41  & 81.16 \\
+31   & 80.49  & 84.78 \\
+41   & 85.00  & 86.23 \\
+51   & 85.09  & 88.41 \\
+61   & 87.99  & 86.23 \\
+71   & 86.27  & 88.41 \\
+81   & 86.90  & 89.13 \\
+91   & 85.55  & 84.06 \\
+101  & 85.91  & 81.88 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 89.53\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 90.58\%} \\
 \bottomrule
 \end{tabular}
 \label{tab:task3-cut1-accuracy}
@@ -843,18 +851,21 @@ with a variance of XXX.
 
 
 In Table (\ref{tab:task3-cut2-accuracy}),
-the accuracy along the epochs is shown.
+the accuracy for Cut 2 along the epochs is shown.
 
 In Figure (\ref{fig:task3-cut2-accuracy}), 
-I provide the plot with epochs on the x-axis where two graphs are plotted:
+I provide the plot for Cut 2 with epochs on the x-axis where two graphs are plotted:
 the train and validation accuracies.
 The context is the one from the previous Table (\ref{tab:task3-cut2-accuracy}). 
 
-Overall, after assessing the performances of the network on the unseen test set
-the model is realiable in estimating the classification of the images with
-a best accuracy slightly lower XXX than the one on the validation set,
-and the average of the accuracies are around XXX,
-with a variance of XXX.
+Overall, after assessing the performances of the network on the same unseen test set,
+the model is the most realiable so far in estimating the classification of the images with
+a test accuracy of 95.68\%.
+It is slightly lower than the best one on the validation set.
+The variance of the test accuracy is 13.28,
+which is a bit higher than Cut 1 althought the latter has less accuracy.
+To complement, the test loss averaged is 0.11.
+
 
 \begin{table}[htbp]
 \centering
@@ -863,19 +874,19 @@ with a variance of XXX.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 61.52 & 93.14 \\
-11   & 98.92 & 95.31 \\
-21   & 99.01 & 97.11 \\
-31   & 98.37 & 91.34 \\
-41   & 99.73 & 94.22 \\
-51   & 99.46 & 94.58 \\
-61   & 99.64 & 93.86 \\
-71   & 99.82 & 93.50 \\
-81   & 99.37 & 95.67 \\
-91   & 99.28 & 94.58 \\
-101  & 99.37 & 94.58 \\
+1    & 61.07  & 91.30 \\
+11   & 98.19  & 94.20 \\
+21   & 99.28  & 94.93 \\
+31   & 98.83  & 95.65 \\
+41   & 98.74  & 95.65 \\
+51   & 99.01  & 94.20 \\
+61   & 99.28  & 93.48 \\
+71   & 99.46  & 94.93 \\
+81   & 99.64  & 93.48 \\
+91   & 99.73  & 93.48 \\
+101  & 99.73  & 92.75 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 97.11\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 96.38\%} \\
 \bottomrule
 \end{tabular}
 \label{tab:task3-cut2-accuracy}
@@ -889,21 +900,54 @@ with a variance of XXX.
 \end{figure}
 
 
-The statistical comparison 
-between the cut1 and the cut2 pre-trained and fine-tuned models yield 
+The statistical comparison with p-value test set to 
+\( p = 0.05 \),
+between Cut 1 and Cut 2 models yields 
 the following results:
-there XXXXX statistical significantly difference with the \( p-value = 0.05 \).
-The best result is yield by model XXXXX with best accuracy XXXX and variance of XXXX.
+\textbf{there is statistical significantly difference}.
+The resulted values from statistical comparison are:
+\( t\_statistic = -3.82, p\_value < 0.02 \).
 
 \subsection*{4}
 
 Based on the performance comparison, 
 the reason why the cut 2 performs significantly better than cut 1
 lies within the transfer learning of the VGG19 itself:
-its architecture is meant to be used XXXX.
-
+by using the whole architecture of the VGG19 model,
+meaning all the convolutional layers,
+the model is able to learn more features from the images
+and generalize better to unseen data.
+The cut 1, instead, uses only the first 11 convolutional layers,	
+meaning that the model is not able to learn as many features as the cut 2 model.
+That is because the architecture of the VGG19 model is designed to learn
+features from the images in a hierarchical way,
+and the more layers are used, the more features are learned.
+The VGG19 model is meant to be seen as a whole rather than in parts,
+and the cut 2 model is able to take advantage of this property.
 Hence, the potential reason of the lower accuracy for cut 1 
-woud be indeed in the difference of XXX.
+woud be indeed in the difference of blocks of the architecture
+of the VGG19 model used for transfer learning.
+
+A metaphor that could be used to explain the difference between cut 1 and cut 2
+would be the following:
+imagine you need an arm to grab something,
+the arm is divided in shoulder, elbow, hand, fingers, knuckles and nails.
+Now, you inadvertently decide to enhance the arm with a tool,
+but you don't want to use the whole arm,
+just a cut of it.
+If you happen to choose up until the fingers, you problably 
+will be able to grab the tool and use it for grabbing objects.
+Maybe choosing up until the knuckles would be enough,
+as the nails are not that impactful to grabbing objects 
+despite they could potentially help with the grip or the precision,
+e.g. when we need to open something very small, 
+like unleash a node in our shoes.
+This kind of scenario is seen afterwards in the Task 3 bonus.
+Most importantly, if you choose only up until the elbow,
+il would be difficult to grab anything at all,
+despite the "architecture" of the arm being amazing 
+as the evolution of our species awarded us with. 
+
 
 \subsection*{5 BONUS}
 
@@ -911,11 +955,11 @@ For the bonus part, I chose the following different cuts among the blocks
 of the VGG19 model:
 
 \begin{itemize}
-	\item \textbf{Cut A} only first block
-	\item \textbf{Cut B} 2 blocks
-	\item \textbf{Cut C} 3 blocks
-	\item \textbf{Cut D} 4 blocks
-	\item \textbf{Cut E} 5 blocks
+	\item \textbf{Cut A}: only first block
+	\item \textbf{Cut B}: 2 blocks
+	\item \textbf{Cut C}: 3 blocks
+	\item \textbf{Cut D}: 4 blocks
+	\item \textbf{Cut E}: 5 blocks
 \end{itemize}
 
 In Figures (\ref{fig:task3-bonus-histogram}, \ref{fig:task3-bonus-plot}), 
@@ -923,25 +967,55 @@ the result plot of the train-test-validation of accuracies are presented
 in two flavours respectively:
 an histogram and a line plot.
 
+Please notice that the histogram in Figure (\ref{fig:task3-bonus-histogram}) 
+for each cut showcase the following:
+it compares the best validation accuracy with the correspondent train accuracy 
+for "best" epoch during training, as we would do in early stopping.
+It compares these 2 bars with the test accuracy,
+from the model evaluation,
+and it plots confidence intervals for the test accuracy
+the give the idea of reliableness of the model.
+
+In the line plot of Figure (\ref{fig:task3-bonus-plot}),
+the train-test-validation accuracies are plotted along the epochs.
+Each cut has its own color and train and validation have different marker styles.
+The semi transparent lines are the test accuracy for the cut with the corresponding color,
+in order to see the final performance of the model along the plot.
+
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=\textwidth]{task3-bonus-plot.png}
-	\caption{train-test-validation accuracies plot}
+	\includegraphics[width=0.8\paperwidth, trim={3.5cm 0cm 0cm 0cm}]{task3-bonus-plot.png}
+	\caption{train-validation-test accuracies plot}
 	\label{fig:task3-bonus-plot}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{task3-bonus-histogram.png}
+	\includegraphics[width=\textwidth]{task3-bonus-histogram.png}
 	\caption{train-test-validation accuracies histogram}
 	\label{fig:task3-bonus-histogram}
 \end{figure}
 
 The reason behind such variation of results leads to a stronger 
 support of the previously mentioned difference between cut1 and cut2:
-XXXXXX.
+the design of the architecture of the VGG19 model is meant to be seen as a whole,
+and, generally speaking, the more layers are used, the more features are learned.
 
-Time increases with layers, it makes sense to choose fewer sufficient layers.
+Metaphorically, Cut A and B could be seem as the arm up until the elbow:
+a poor performance from one of the best models for image classification.
+The, Cut C could be seen as the arm up until, but excluding, the hand:
+could be used but the likehood of success/efficiency is comparable to less
+than a coin flip. 
+Lastly, Cut D and E are the equivalent of the whole arm or the arm exluding the nails:
+reaching the maximum potential of the model,
+or an accuracy statistically trascurable from the maximum potential. 
+
+Then, why not always choose the whole architecture?	
+Well, the more layers are used, the more computational power is needed,
+and the more time is required to train the model.
+Fine tuning could be a solution to this problem,
+but the more layers are used, the more hyperparameters are needed to be tuned.
+It is a trade-off between computational power, time and hyperparameters tuning.
 
 In Tables (
 	\ref{tab:task3-bonus-cuta-accuracy},
@@ -949,8 +1023,9 @@ In Tables (
 	\ref{tab:task3-bonus-cutc-accuracy},
 	\ref{tab:task3-bonus-cutd-accuracy},
 	\ref{tab:task3-bonus-cute-accuracy}
-),the accuracies for respectively
-for Cut A, B, C, D, E are showcased.
+),the train and validation accuracies along the epochs are shown 
+for respectively
+Cut A, B, C, D, E.
 
 \begin{table}[htbp]
 \centering
@@ -959,19 +1034,23 @@ for Cut A, B, C, D, E are showcased.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 19.24 & 15.88 \\
-11   & 15.36 & 14.08 \\
-21   & 18.07 & 14.44 \\
-31   & 16.53 & 14.44 \\
-41   & 16.53 & 14.44 \\
-51   & 17.52 & 14.44 \\
-61   & 18.79 & 14.44 \\
-71   & 16.80 & 14.44 \\
-81   & 16.80 & 14.44 \\
-91   & 17.43 & 14.44 \\
-101  & 18.79 & 14.44 \\
+1    & 18.79  & 15.22 \\
+11   & 16.08  & 11.59 \\
+21   & 17.89  & 11.59 \\
+31   & 18.16  & 11.59 \\
+41   & 18.61  & 11.59 \\
+51   & 18.07  & 11.59 \\
+61   & 18.88  & 11.59 \\
+71   & 17.25  & 11.59 \\
+81   & 17.98  & 11.59 \\
+91   & 17.98  & 11.59 \\
+101  & 17.98  & 11.59 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 15.88\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 15.22\%} \\
+\midrule
+\multicolumn{3}{c}{Test accuracy: 19.42\%} \\
+\multicolumn{3}{c}{Test loss averaged: 1.7911} \\
+\multicolumn{3}{c}{Accuracy variance: 1.7562} \\
 \bottomrule
 \end{tabular}
 \label{tab:task3-bonus-cuta-accuracy}
@@ -984,19 +1063,23 @@ for Cut A, B, C, D, E are showcased.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 16.80 & 16.61 \\
-11   & 17.98 & 14.80 \\
-21   & 17.71 & 14.44 \\
-31   & 17.16 & 14.44 \\
-41   & 17.62 & 14.44 \\
-51   & 18.52 & 14.44 \\
-61   & 17.34 & 14.44 \\
-71   & 18.88 & 14.44 \\
-81   & 17.25 & 14.44 \\
-91   & 17.16 & 14.44 \\
-101  & 16.62 & 14.44 \\
+1    & 17.71  & 15.94 \\
+11   & 19.06  & 14.49 \\
+21   & 17.16  & 11.59 \\
+31   & 16.53  & 11.59 \\
+41   & 17.25  & 11.59 \\
+51   & 18.88  & 11.59 \\
+61   & 16.53  & 11.59 \\
+71   & 18.52  & 11.59 \\
+81   & 17.34  & 11.59 \\
+91   & 18.34  & 11.59 \\
+101  & 17.52  & 11.59 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 16.61\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 15.94\%} \\
+\midrule
+\multicolumn{3}{c}{Test accuracy: 19.42\%} \\
+\multicolumn{3}{c}{Test loss averaged: 1.7810} \\
+\multicolumn{3}{c}{Accuracy variance: 53.3510} \\
 \bottomrule
 \end{tabular}
 \label{tab:task3-bonus-cutb-accuracy}
@@ -1009,19 +1092,23 @@ for Cut A, B, C, D, E are showcased.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 21.77 & 24.55 \\
-11   & 30.17 & 30.69 \\
-21   & 31.17 & 26.71 \\
-31   & 26.02 & 25.27 \\
-41   & 31.07 & 28.88 \\
-51   & 30.53 & 28.52 \\
-61   & 30.98 & 28.52 \\
-71   & 30.35 & 28.52 \\
-81   & 31.53 & 28.88 \\
-91   & 29.09 & 28.88 \\
-101  & 29.36 & 28.88 \\
+1    & 23.49  & 17.39 \\
+11   & 33.69  & 42.03 \\
+21   & 41.92  & 48.55 \\
+31   & 40.47  & 35.51 \\
+41   & 41.92  & 39.86 \\
+51   & 40.20  & 36.96 \\
+61   & 41.10  & 37.68 \\
+71   & 39.11  & 36.96 \\
+81   & 42.64  & 37.68 \\
+91   & 39.75  & 38.41 \\
+101  & 41.01  & 37.68 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 35.38\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 50.72\%} \\
+\midrule
+\multicolumn{3}{c}{Test accuracy: 38.13\%} \\
+\multicolumn{3}{c}{Test loss averaged: 1.3020} \\
+\multicolumn{3}{c}{Accuracy variance: 92.1552} \\
 \bottomrule
 \end{tabular}
 \label{tab:task3-bonus-cutc-accuracy}
@@ -1034,19 +1121,23 @@ for Cut A, B, C, D, E are showcased.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 34.24 & 77.26 \\
-11   & 92.59 & 92.06 \\
-21   & 95.66 & 92.78 \\
-31   & 95.03 & 91.34 \\
-41   & 96.75 & 94.58 \\
-51   & 97.56 & 93.50 \\
-61   & 95.75 & 91.70 \\
-71   & 97.20 & 91.70 \\
-81   & 98.10 & 90.25 \\
-91   & 97.92 & 90.97 \\
-101  & 98.74 & 93.14 \\
+1    & 34.60  & 66.67 \\
+11   & 90.97  & 89.13 \\
+21   & 95.12  & 90.58 \\
+31   & 95.57  & 92.03 \\
+41   & 96.75  & 92.03 \\
+51   & 95.30  & 93.48 \\
+61   & 97.65  & 91.30 \\
+71   & 98.10  & 89.13 \\
+81   & 97.29  & 91.30 \\
+91   & 98.55  & 89.13 \\
+101  & 99.01  & 92.03 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 94.58\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 94.93\%} \\
+\midrule
+\multicolumn{3}{c}{Test accuracy: 96.40\%} \\
+\multicolumn{3}{c}{Test loss averaged: 0.1593} \\
+\multicolumn{3}{c}{Accuracy variance: 3.9062} \\
 \bottomrule
 \end{tabular}
 \label{tab:task3-bonus-cutd-accuracy}
@@ -1059,19 +1150,23 @@ for Cut A, B, C, D, E are showcased.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 59.53 & 91.34 \\
-11   & 98.28 & 92.42 \\
-21   & 98.74 & 93.86 \\
-31   & 98.92 & 94.95 \\
-41   & 99.19 & 96.03 \\
-51   & 99.46 & 93.86 \\
-61   & 99.37 & 92.78 \\
-71   & 99.19 & 93.14 \\
-81   & 99.01 & 94.22 \\
-91   & 99.28 & 93.50 \\
-101  & 99.82 & 94.95 \\
+1    & 57.54  & 94.20 \\
+11   & 99.19  & 94.93 \\
+21   & 98.64  & 94.20 \\
+31   & 98.74  & 94.93 \\
+41   & 99.37  & 94.20 \\
+51   & 98.92  & 94.20 \\
+61   & 99.37  & 96.38 \\
+71   & 99.64  & 97.10 \\
+81   & 99.64  & 96.38 \\
+91   & 99.73  & 94.20 \\
+101  & 99.64  & 92.75 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 96.75\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 97.10\%} \\
+\midrule
+\multicolumn{3}{c}{Test accuracy: 95.68\%} \\
+\multicolumn{3}{c}{Test loss averaged: 0.2962} \\
+\multicolumn{3}{c}{Accuracy variance: 5.4688} \\
 \bottomrule
 \end{tabular}
 \label{tab:task3-bonus-cute-accuracy}
