@@ -30,6 +30,7 @@
 \graphicspath{{Figures/}{./figures/}} % where to look for included images (trailing slash required)
 \usepackage{float}
 \usepackage{pythonhighlight}
+\usepackage{booktabs}
 
 
 %----------------------------------------------------------------------------------------
@@ -231,25 +232,63 @@ The seed is passed to the functions
 and set initially to 
 \pyth{np.random.seed(), torch.manual_seed()}
 to ensure the reproducibility of the results.
+Since I had problems with the dataset and loaders, 
+I figured out that by setting the seed to the same value
+to all "pseudo-random" functions,
+I will eventually have the same charateristics of the dataset, 
+i.e. same ordering.
+It was a nice and useful trick to have the same dataset per every run
+and also creating new data that won't mess up with the previous ones due to 
+object references and how the data is loaded in memory.
 
 \subsection*{6}
 
-In Figure (\ref{fig:task1}), 
-I provide the plot with epochs on the x-axis where two graphs are plotted:
-the train and test accuracies.
+In Table (\ref{tab:task1-accuracy}),
+the accuracy along the epochs is shown.
 
-% \begin{figure}[htbp]
-%     \centering
-%     \includegraphics[width=0.5\textwidth]{./figures/task1.png}
-%     \caption{Train \& test accuracies for FFNN}
-%     \label{fig:task1}
-% \end{figure}
+In Figure (\ref{fig:task1-accuracy}), 
+I provide the plot with epochs on the x-axis where two graphs are plotted:
+the train and validation accuracies.
+The context is the one from the previous Table (\ref{tab:task1-accuracy}). 
+
+
+\begin{table}[htbp]
+\centering
+\caption{Training and Validation Accuracy per Epoch for FFNN}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
+\midrule
+1    & 19.87  & 18.41  \\
+11   & 47.88  & 31.77  \\
+21   & 72.99  & 38.99  \\
+31   & 85.37  & 31.77  \\
+41   & 98.92  & 34.66  \\
+51   & 77.51  & 25.63  \\
+61   & 99.91  & 33.21  \\
+71   & 100.00 & 32.13  \\
+81   & 100.00 & 31.41  \\
+91   & 100.00 & 32.49  \\
+101  & 100.00 & 31.77  \\
+\midrule
+\multicolumn{3}{c}{Best validation accuracy: 38.99\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:task1-accuracy}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{./figures/task1-accuracy.png}
+\caption{Train \& validation accuracies for FFNN}
+\label{fig:task1-accuracy}
+\end{figure}
 
 \subsection*{7}
 
-Overall, after assessing the performances of the network on the unseen validation set
+Overall, after assessing the performances of the network on the unseen test set
 the model is realiable in estimating the classification of the images with
-a best accuracy slightly lower XXX than the one on the test set,
+a best accuracy slightly lower XXX than the one on the validation set,
 and the average of the accuracies are around XXX,
 with a variance of XXX.
 
@@ -271,7 +310,42 @@ and lead to the CNN model approach in Task 2.
 \subsection*{8 BONUS}
 
 The bonus was completed using the mean and average for each RGB channel.
-The results thought show a similar slightly lower accuracy value during training.
+In Figure (\ref{fig:task1-bonus-accuracy}) 
+and Table (\ref{tab:task1-bonus-accuracy}), 
+the results thought show a similar slightly lower accuracy value during training.
+
+\begin{table}[htbp]
+\centering
+\caption{Training and Validation Accuracy per Epoch for FFNN with features}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
+\midrule
+1    & 17.89  & 24.55  \\
+11   & 31.35  & 25.27  \\
+21   & 31.44  & 28.16  \\
+31   & 31.44  & 29.96  \\
+41   & 31.98  & 27.44  \\
+51   & 32.16  & 32.13  \\
+61   & 32.43  & 32.13  \\
+71   & 32.88  & 32.85  \\
+81   & 34.33  & 29.96  \\
+91   & 34.15  & 31.05  \\
+101  & 34.15  & 33.94  \\
+\midrule
+\multicolumn{3}{c}{Best validation accuracy: 34.30\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:task1-bonus-accuracy}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{./figures/task1-bonus-accuracy.png}
+\caption{Train \& validation accuracies for FFNN with features}
+\label{fig:task1-bonus-accuracy}
+\end{figure}
+
 The validation results highlighting XXX with variance of XXX.
 I would have like to put more features in order to get a better model.
 
@@ -329,27 +403,122 @@ to improve the performances (if feasible).
 \subsection*{3}
 
 The following train parameters were chosen for the model.
-The Optmizer chosen is XXXX because XXXX.
+The Optimizer chosen is XXXX because XXXX.
 The loss function used is the CrossEntropyLoss function, 
 which fits the categorical nature of the classification problem.
 
 
 \subsection*{4}
 
-Overall, after assessing the performances of the network on the unseen validation set
+In Table (\ref{tab:task2-accuracy}),
+the accuracy along the epochs is shown.
+
+In Figure (\ref{fig:task2-accuracy}), 
+I provide the plot with epochs on the x-axis where two graphs are plotted:
+the train and validation accuracies.
+The context is the one from the previous Table (\ref{tab:task2-accuracy}). 
+
+Overall, after assessing the performances of the network on the unseen test set
 the model is realiable in estimating the classification of the images with
-a best accuracy slightly lower XXX than the one on the test set,
+a best accuracy slightly lower XXX than the one on the validation set,
 and the average of the accuracies are around XXX,
 with a variance of XXX.
+
+\begin{table}[htbp]
+\centering
+\caption{Training and Validation Accuracy per Epoch for CNN}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
+\midrule
+1    & 18.97  & 19.13  \\
+11   & 95.66  & 49.46  \\
+21   & 100.00 & 53.79  \\
+31   & 100.00 & 54.51  \\
+41   & 100.00 & 54.51  \\
+51   & 100.00 & 54.51  \\
+61   & 100.00 & 54.87  \\
+71   & 100.00 & 55.23  \\
+81   & 100.00 & 54.87  \\
+91   & 100.00 & 54.87  \\
+101  & 100.00 & 54.87  \\
+\midrule
+\multicolumn{3}{c}{Best validation accuracy: 55.23\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:task2-accuracy}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{./figures/task2-accuracy.png}
+\caption{Train \& validation accuracies for CNN}
+\label{fig:task2-accuracy}
+\end{figure}
+
 
 \subsection*{5}
 
 The statistical comparison between the simple FFNN and the current CNN model yield 
 the following results:
 there XXXXX statistical significantly difference with the \( p-value = 0.05 \).
-The best result is yild by model XXXXX with best accuracy XXXX and variance of XXXX.
+The best result is yield by model XXXXX with best accuracy XXXX and variance of XXXX.
 
-\subsection*{6 BONUS}
+\subsection*{6 (present only in README.md)}
+\textit{
+Apply image manipulation and augmentation techniques in order to improve the performance of your models. 
+Evaluate the performance of the model using the new images 
+and compare the results with the previous evaluation performed in part 3. 
+Provide your observations and insights.
+}
+In Table (\ref{tab:task2-aug-accuracy}),
+the accuracy along the epochs is shown.
+
+In Figure (\ref{fig:task2-aug-accuracy}), 
+I provide the plot with epochs on the x-axis where two graphs are plotted:
+the train and validation accuracies.
+The context is the one from the previous Table (\ref{tab:task2-aug-accuracy}). 
+
+Overall, after assessing the performances of the network on the unseen test set
+the model is realiable in estimating the classification of the images with
+a best accuracy slightly lower XXX than the one on the validation set,
+and the average of the accuracies are around XXX,
+with a variance of XXX.
+
+\begin{table}[htbp]
+\centering
+\caption{Training and Validation Accuracy per Epoch for Augmented CNN}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
+\midrule
+1    & 17.43  & 18.77  \\
+11   & 67.03  & 67.15  \\
+21   & 82.84  & 79.78  \\
+31   & 88.89  & 77.26  \\
+41   & 94.40  & 77.62  \\
+51   & 95.03  & 80.14  \\
+61   & 95.93  & 79.78  \\
+71   & 95.48  & 82.31  \\
+81   & 97.47  & 85.20  \\
+91   & 97.29  & 84.84  \\
+101  & 97.83  & 82.67  \\
+\midrule
+\multicolumn{3}{c}{Best validation accuracy: 85.56\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:task2-aug-accuracy}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{./figures/task2-aug-accuracy.png}
+\caption{Train \& Validation accuracies for Augmented CNN}
+\label{fig:task2-aug-accuracy}
+\end{figure}
+
+
+\subsection*{7 BONUS}
 
 For the grid search I choose to change the following hyperparameters:
 \begin{itemize}
@@ -360,7 +529,7 @@ For the grid search I choose to change the following hyperparameters:
 
 The epochs were fixed at 100 as defined in configuration.
 
-The results of such grid search yield me a model with peak test accuracy of
+The results of such grid search yield me a model with peak validation accuracy of
 \( 62.09 \% \)
 with the following best parameters:
 
@@ -369,6 +538,33 @@ with the following best parameters:
 	\item learning rate = 0.001
 	\item epochs = 100
 \end{itemize}
+
+In Table (\ref{tab:task2-bonus-accuracy}), the accuracy along the epochs is shown.
+
+\begin{table}[htbp]
+\centering
+\caption{Training and Validation Accuracy per Epoch for CNN with Grid Search}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
+\midrule
+1    & 18.16  & 17.33  \\
+11   & 99.46  & 58.48  \\
+21   & 99.64  & 55.96  \\
+31   & 100.00 & 61.73  \\
+41   & 100.00 & 61.37  \\
+51   & 100.00 & 61.01  \\
+61   & 100.00 & 60.29  \\
+71   & 100.00 & 59.93  \\
+81   & 100.00 & 59.57  \\
+91   & 100.00 & 59.21  \\
+101  & 100.00 & 58.48  \\
+\midrule
+\multicolumn{3}{c}{Best validation accuracy: 62.09\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:task2-bonus-accuracy}
+\end{table}
 
 
 \newpage
@@ -471,15 +667,112 @@ For the second cut, we trivially load all the features from the model.
 For fine tuning we put also a sequence of 3 linear layers 
 with relu activation function complementing 
 with a dropout strategy to try to avoid overfitting.
-The number of neuron were 128 in both input and hidden, 
+Starting from flattened image size on the VGG19,
+for which I wrote a dummy input in the constructor to retrieve what would be the
+flatten image after the features of the pre-trained model up to its 11th convolution
+layer and its associated activation functions and pools for cut1.
+The number of neuron in the added sequence of layers were 256 and 128, 
 ending with an output correspoding to our cat types in the dataset, i.e. 6.
+
+In Table (\ref{tab:task3-cut1-accuracy}),
+the accuracy along the epochs is shown.
+
+In Figure (\ref{fig:task3-cut1-accuracy}), 
+I provide the plot with epochs on the x-axis where two graphs are plotted:
+the train and validation accuracies.
+The context is the one from the previous Table (\ref{tab:task3-cut1-accuracy}). 
+
+Overall, after assessing the performances of the network on the unseen test set
+the model is realiable in estimating the classification of the images with
+a best accuracy slightly lower XXX than the one on the validation set,
+and the average of the accuracies are around XXX,
+with a variance of XXX.
+
+\begin{table}[htbp]
+\centering
+\caption{Training and Validation Accuracy per Epoch for fine-tuned VGG19 with Cut 1}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
+\midrule
+1    & 31.89 & 58.48 \\
+11   & 71.09 & 84.48 \\
+21   & 77.69 & 88.09 \\
+31   & 80.94 & 85.56 \\
+41   & 81.66 & 87.00 \\
+51   & 82.57 & 85.92 \\
+61   & 83.29 & 85.92 \\
+71   & 85.00 & 90.61 \\
+81   & 78.41 & 86.28 \\
+91   & 82.57 & 84.12 \\
+101  & 85.73 & 86.28 \\
+\midrule
+\multicolumn{3}{c}{Best validation accuracy: 90.61\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:task3-cut1-accuracy}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{./figures/task3-cut1-accuracy.png}
+\caption{Train \& validation accuracies for fine-tuned VGG19 with Cut 1}
+\label{fig:task3-cut1-accuracy}
+\end{figure}
+
+
+In Table (\ref{tab:task3-cut2-accuracy}),
+the accuracy along the epochs is shown.
+
+In Figure (\ref{fig:task3-cut2-accuracy}), 
+I provide the plot with epochs on the x-axis where two graphs are plotted:
+the train and validation accuracies.
+The context is the one from the previous Table (\ref{tab:task3-cut2-accuracy}). 
+
+Overall, after assessing the performances of the network on the unseen test set
+the model is realiable in estimating the classification of the images with
+a best accuracy slightly lower XXX than the one on the validation set,
+and the average of the accuracies are around XXX,
+with a variance of XXX.
+
+\begin{table}[htbp]
+\centering
+\caption{Training and Validation Accuracy per Epoch for fine-tuned VGG19 with Cut 2}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
+\midrule
+1    & 61.07 & 92.78 \\
+11   & 99.46 & 95.31 \\
+21   & 98.55 & 95.31 \\
+31   & 99.28 & 94.22 \\
+41   & 98.92 & 95.67 \\
+51   & 99.37 & 93.86 \\
+61   & 99.64 & 93.86 \\
+71   & 99.64 & 94.58 \\
+81   & 99.10 & 92.06 \\
+91   & 99.46 & 94.22 \\
+101  & 99.91 & 94.22 \\
+\midrule
+\multicolumn{3}{c}{Best test accuracy: 96.75\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:task3-cut2-accuracy}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{./figures/task3-cut2-accuracy.png}
+\caption{Train \& validation accuracies for fine-tuned VGG19 with Cut 2}
+\label{fig:task3-cut2-accuracy}
+\end{figure}
+
 
 The statistical comparison 
 between the cut1 and the cut2 pre-trained and fine-tuned models yield 
 the following results:
 there XXXXX statistical significantly difference with the \( p-value = 0.05 \).
 The best result is yield by model XXXXX with best accuracy XXXX and variance of XXXX.
-
 
 \subsection*{4}
 
@@ -493,27 +786,175 @@ woud be indeed in the difference of XXX.
 
 \subsection*{5 BONUS}
 
-For the bonus part, I arbitrarly chose the following different cuts among the blocks
+For the bonus part, I chose the following different cuts among the blocks
 of the VGG19 model:
 
 \begin{itemize}
-	\item \textbf{Cut A} XXX
-	\item \textbf{Cut B} XXX
-	\item \textbf{Cut C} XXX
+	\item \textbf{Cut A} only first block
+	\item \textbf{Cut B} 2 blocks
+	\item \textbf{Cut C} 3 blocks
+	\item \textbf{Cut D} 4 blocks
+	\item \textbf{Cut E} 5 blocks
 \end{itemize}
 
-In Figure (\ref{fig:task3-bonus-plot}), 
-the result plot of the train-test-validation of accuracies is showcased.
+In Figures (\ref{fig:task3-bonus-histogram}, \ref{fig:task3-bonus-plot}), 
+the result plot of the train-test-validation of accuracies are presented 
+in two flavours respectively:
+an histogram and a line plot.
 
-\begin{figure}[th]
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=0.33]{cuts.png}
+	\includegraphics[width=\textwidth]{task3-bonus-plot.png}
 	\caption{train-test-validation accuracies plot}
 	\label{fig:task3-bonus-plot}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{task3-bonus-histogram.png}
+	\caption{train-test-validation accuracies histogram}
+	\label{fig:task3-bonus-histogram}
 \end{figure}
 
 The reason behind such variation of results leads to a stronger 
 support of the previously mentioned difference between cut1 and cut2:
 XXXXXX.
+
+Time increases with layers, it makes sense to choose fewer sufficient layers.
+
+In Tables (
+	\ref{tab:task3-bonus-cuta-accuracy},
+	\ref{tab:task3-bonus-cutb-accuracy},
+	\ref{tab:task3-bonus-cutc-accuracy},
+	\ref{tab:task3-bonus-cutd-accuracy},
+	\ref{tab:task3-bonus-cute-accuracy},
+) showcase the accuracies respectively
+for Cut A, B, C, D, E.
+
+\begin{table}[htbp]
+\centering
+\caption{Training and Validation Accuracy per Epoch for Model Cut A}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
+\midrule
+1    & 18.61 & 19.86 \\
+11   & 17.16 & 14.44 \\
+21   & 17.71 & 14.44 \\
+31   & 16.71 & 14.44 \\
+41   & 18.07 & 14.44 \\
+51   & 17.16 & 14.44 \\
+61   & 17.62 & 14.44 \\
+71   & 17.89 & 14.44 \\
+81   & 18.61 & 14.44 \\
+91   & 17.62 & 14.44 \\
+101  & 17.80 & 14.44 \\
+\midrule
+\multicolumn{3}{c}{Best validation accuracy: 19.86\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:task3-model-cuta-accuracy}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Training and Validation Accuracy per Epoch for Model Cut B}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
+\midrule
+1    & 21.86 & 23.10 \\
+11   & 16.80 & 17.69 \\
+21   & 17.25 & 14.44 \\
+31   & 16.08 & 14.44 \\
+41   & 17.89 & 14.44 \\
+51   & 16.71 & 14.44 \\
+61   & 17.71 & 14.44 \\
+71   & 17.52 & 14.44 \\
+81   & 17.43 & 14.44 \\
+91   & 17.80 & 14.44 \\
+101  & 16.26 & 14.44 \\
+\midrule
+\multicolumn{3}{c}{Best validation accuracy: 23.10\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:task3-model-cutb-accuracy}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Training and Validation Accuracy per Epoch for Model Cut C}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
+\midrule
+1    & 20.42 & 33.57 \\
+11   & 37.13 & 46.93 \\
+21   & 38.57 & 45.49 \\
+31   & 39.30 & 45.13 \\
+41   & 38.93 & 46.57 \\
+51   & 38.57 & 42.24 \\
+61   & 38.75 & 43.32 \\
+71   & 39.66 & 45.13 \\
+81   & 40.56 & 41.88 \\
+91   & 39.48 & 41.88 \\
+101  & 37.85 & 42.60 \\
+\midrule
+\multicolumn{3}{c}{Best validation accuracy: 50.90\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:task3-model-cutc-accuracy}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Training and Validation Accuracy per Epoch for Model Cut D}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
+\midrule
+1    & 29.81 & 67.15 \\
+11   & 91.69 & 85.56 \\
+21   & 95.84 & 93.50 \\
+31   & 96.30 & 95.31 \\
+41   & 97.20 & 92.78 \\
+51   & 96.75 & 94.58 \\
+61   & 98.64 & 93.86 \\
+71   & 97.29 & 94.22 \\
+81   & 98.46 & 92.06 \\
+91   & 98.64 & 89.89 \\
+101  & 97.65 & 91.70 \\
+\midrule
+\multicolumn{3}{c}{Best validation accuracy: 95.67\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:task3-model-cutd-accuracy}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Training and Validation Accuracy per Epoch for Model Cut E}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
+\midrule
+1    & 61.79 & 91.70 \\
+11   & 98.92 & 94.58 \\
+21   & 99.19 & 95.31 \\
+31   & 99.37 & 94.58 \\
+41   & 98.83 & 94.22 \\
+51   & 99.37 & 95.67 \\
+61   & 99.19 & 95.67 \\
+71   & 99.01 & 93.50 \\
+81   & 99.82 & 94.58 \\
+91   & 99.28 & 94.95 \\
+101  & 99.55 & 94.58 \\
+\midrule
+\multicolumn{3}{c}{Best validation accuracy: 96.75\%} \\
+\bottomrule
+\end{tabular}
+\label{tab:task3-model-cute-accuracy}
+\end{table}
+
 
 \end{document}
