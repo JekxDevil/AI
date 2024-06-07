@@ -208,8 +208,9 @@ Apparatus description:
 	\item \textbf{OS} Windows 11 Pro 23H2
 \end{itemize}
 
-The first scratch of the assigment was developed on Kaggle, were the only hardware specs 
-provided were a python environment in a notebook with a NVIDIA P100 GPU dedicated to the task,
+The first scratch of the assigment was developed on \href{https://www.kaggle.com/}{Kaggle}, 
+were the only hardware specs provided were a Python environment in a notebook 
+with a NVIDIA P100 GPU dedicated to the task,
 CUDA enabled during training.
 
 the configuration description for the training and assignment overall are:
@@ -479,6 +480,8 @@ Overall, after assessing the performances of the network on the same unseen test
 the model is estimating the classification of the images with an accuracy of 65.47\%, 
 slightly lower than the best one on the validation set.
 The variance of the accuracy is 34.85, and to complement, the loss averaged is 2.2034.
+The overfitting phenomenon is clearly present after the 11th epoch,
+where the validation accuracy starts to decrease while the training accuracy peaks to 100.
 The model performs better than the odds of a coin flip!
 
 \begin{table}[htbp]
@@ -630,50 +633,61 @@ For the grid search I choose to change the following hyperparameters:
 \begin{itemize}
 	\item[1] Learning rate: [0.001, 0.01, 0.1]
 	\item[2] Batch size: [32, 64, 128]
-	% \item[3] Optimizer: [Adam, SGD]
 \end{itemize}
 
 The epochs were fixed at 100 as defined in configuration.
-
+The aim of this grid search is to find the best hyperparameters for the model
+with respect to the learning rate and the batch size, 
+in order to improve the performances of the model.
 The results of such grid search yield me a model with peak validation accuracy of
-\( 62.09 \% \)
+\( 60.43 \% \)
 with the following best parameters:
 
 \begin{itemize}
 	\item batch size = 32
 	\item learning rate = 0.001
-	\item epochs = 101
 \end{itemize}
 
 In Table (\ref{tab:task2-bonus-accuracy}), the accuracy along the epochs is shown.
+The data shows an overfitting phenomenon after the 21st epoch,
+where the validation accuracy starts to decrease while the training accuracy peaks to 100.
+This model has an accuracy of 60.43\%, 
+slightly less accuracy the the previous simple CNN model of Task 2 of 65.47\%.
+The variance of the accuracy is 71.49, 
+which is more than the simple CNN model.
+to complement the loss averaged is 2.65.
+Even the peak validation accuracy is less than the one from the simple CNN model.
+By performing a statistical comparison with the same settings as the previous ones,
+the results yield that there is \textbf{no statistical significantly difference}
+between the simple CNN model from Task 2 and the current grid searched CNN model.
 
 \begin{table}[htbp]
 \centering
-\caption{Training and Validation Accuracy per Epoch for CNN with Grid Search}
+\caption{Training and Validation Accuracy per Epoch for best CNN Grid Searched}
 \begin{tabular}{ccc}
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 21.05 & 27.44 \\
-11   & 99.01 & 53.07 \\
-21   & 100.00 & 66.43 \\
-31   & 100.00 & 66.06 \\
-41   & 100.00 & 65.34 \\
-51   & 100.00 & 65.34 \\
-61   & 100.00 & 65.34 \\
-71   & 100.00 & 66.06 \\
-81   & 100.00 & 66.43 \\
-91   & 100.00 & 66.79 \\
-101  & 100.00 & 66.06 \\
+1    & 15.36  & 21.01  \\
+11   & 99.64  & 55.80  \\
+21   & 100.00 & 64.49  \\
+31   & 100.00 & 63.77  \\
+41   & 100.00 & 63.04  \\
+51   & 100.00 & 62.32  \\
+61   & 100.00 & 62.32  \\
+71   & 100.00 & 62.32  \\
+81   & 100.00 & 62.32  \\
+91   & 100.00 & 60.87  \\
+101  & 100.00 & 60.87  \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 67.15\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 67.39\%} \\
 \bottomrule
 \end{tabular}
 \label{tab:task2-bonus-accuracy}
 \end{table}
 
 
-\newpage
+\clearpage
 %----------------------------------------------------------------------------------------
 %	Task 3
 %----------------------------------------------------------------------------------------
