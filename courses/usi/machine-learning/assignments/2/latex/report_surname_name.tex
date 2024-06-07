@@ -227,6 +227,7 @@ which is exactly the desired behavior.
 
 The training loop implemented follows a similar pattern provided by PyTorch documentation.
 
+\textbf{Reproducibility}:
 The seed is passed to the functions 
 \pyth{train_test_split(..., random_state=...)}
 and set initially to 
@@ -240,6 +241,15 @@ i.e. same ordering.
 It was a nice and useful trick to have the same dataset per every run
 and also creating new data that won't mess up with the previous ones due to 
 object references and how the data is loaded in memory.
+Despite this, only the first Task 1 and its bonus lead to 
+deterministic loss values throught traning epochs.
+The reason behind is that despite setting the seeds, 
+the table results in this report can be different because
+the torch libraries to perform non deterministic operations
+for convolutions, used from Task 2 onwards.
+More on that on \href{https://pytorch.org/docs/stable/notes/randomness.html}{
+	CUDA convolution determinism - PyTorch documentation
+}.
 
 \subsection*{6}
 
@@ -431,19 +441,19 @@ with a variance of XXX.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 18.97  & 19.13  \\
-11   & 95.66  & 49.46  \\
-21   & 100.00 & 53.79  \\
-31   & 100.00 & 54.51  \\
-41   & 100.00 & 54.51  \\
-51   & 100.00 & 54.51  \\
-61   & 100.00 & 54.87  \\
-71   & 100.00 & 55.23  \\
-81   & 100.00 & 54.87  \\
-91   & 100.00 & 54.87  \\
-101  & 100.00 & 54.87  \\
+1    & 19.15 & 21.30 \\
+11   & 97.92 & 64.26 \\
+21   & 100.00 & 67.51 \\
+31   & 100.00 & 67.51 \\
+41   & 100.00 & 67.15 \\
+51   & 100.00 & 66.43 \\
+61   & 100.00 & 66.43 \\
+71   & 100.00 & 67.15 \\
+81   & 100.00 & 67.87 \\
+91   & 100.00 & 68.59 \\
+101  & 100.00 & 68.59 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 55.23\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 68.59\%} \\
 \bottomrule
 \end{tabular}
 \label{tab:task2-accuracy}
@@ -492,19 +502,19 @@ with a variance of XXX.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 17.43  & 18.77  \\
-11   & 67.03  & 67.15  \\
-21   & 82.84  & 79.78  \\
-31   & 88.89  & 77.26  \\
-41   & 94.40  & 77.62  \\
-51   & 95.03  & 80.14  \\
-61   & 95.93  & 79.78  \\
-71   & 95.48  & 82.31  \\
-81   & 97.47  & 85.20  \\
-91   & 97.29  & 84.84  \\
-101  & 97.83  & 82.67  \\
+1    & 17.89 & 23.10 \\
+11   & 63.23 & 70.40 \\
+21   & 78.95 & 79.78 \\
+31   & 86.72 & 76.17 \\
+41   & 91.96 & 80.51 \\
+51   & 95.21 & 79.42 \\
+61   & 95.75 & 82.67 \\
+71   & 96.21 & 81.23 \\
+81   & 96.75 & 80.14 \\
+91   & 98.74 & 87.36 \\
+101  & 98.19 & 83.03 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 85.56\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 87.36\%} \\
 \bottomrule
 \end{tabular}
 \label{tab:task2-aug-accuracy}
@@ -534,9 +544,9 @@ The results of such grid search yield me a model with peak validation accuracy o
 with the following best parameters:
 
 \begin{itemize}
-	\item batch size = 64
+	\item batch size = 32
 	\item learning rate = 0.001
-	\item epochs = 100
+	\item epochs = 101
 \end{itemize}
 
 In Table (\ref{tab:task2-bonus-accuracy}), the accuracy along the epochs is shown.
@@ -548,19 +558,19 @@ In Table (\ref{tab:task2-bonus-accuracy}), the accuracy along the epochs is show
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 18.16  & 17.33  \\
-11   & 99.46  & 58.48  \\
-21   & 99.64  & 55.96  \\
-31   & 100.00 & 61.73  \\
-41   & 100.00 & 61.37  \\
-51   & 100.00 & 61.01  \\
-61   & 100.00 & 60.29  \\
-71   & 100.00 & 59.93  \\
-81   & 100.00 & 59.57  \\
-91   & 100.00 & 59.21  \\
-101  & 100.00 & 58.48  \\
+1    & 21.05 & 27.44 \\
+11   & 99.01 & 53.07 \\
+21   & 100.00 & 66.43 \\
+31   & 100.00 & 66.06 \\
+41   & 100.00 & 65.34 \\
+51   & 100.00 & 65.34 \\
+61   & 100.00 & 65.34 \\
+71   & 100.00 & 66.06 \\
+81   & 100.00 & 66.43 \\
+91   & 100.00 & 66.79 \\
+101  & 100.00 & 66.06 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 62.09\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 67.15\%} \\
 \bottomrule
 \end{tabular}
 \label{tab:task2-bonus-accuracy}
@@ -695,23 +705,24 @@ with a variance of XXX.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 31.89 & 58.48 \\
-11   & 71.09 & 84.48 \\
-21   & 77.69 & 88.09 \\
-31   & 80.94 & 85.56 \\
-41   & 81.66 & 87.00 \\
-51   & 82.57 & 85.92 \\
-61   & 83.29 & 85.92 \\
-71   & 85.00 & 90.61 \\
-81   & 78.41 & 86.28 \\
-91   & 82.57 & 84.12 \\
-101  & 85.73 & 86.28 \\
+1    & 33.79 & 71.84 \\
+11   & 67.66 & 79.42 \\
+21   & 78.77 & 85.20 \\
+31   & 81.93 & 83.03 \\
+41   & 82.84 & 81.95 \\
+51   & 84.10 & 83.75 \\
+61   & 85.00 & 83.75 \\
+71   & 87.08 & 87.00 \\
+81   & 86.54 & 83.75 \\
+91   & 85.82 & 84.84 \\
+101  & 86.27 & 89.53 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 90.61\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 89.53\%} \\
 \bottomrule
 \end{tabular}
 \label{tab:task3-cut1-accuracy}
 \end{table}
+
 
 \begin{figure}[htbp]
 \centering
@@ -742,19 +753,19 @@ with a variance of XXX.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 61.07 & 92.78 \\
-11   & 99.46 & 95.31 \\
-21   & 98.55 & 95.31 \\
-31   & 99.28 & 94.22 \\
-41   & 98.92 & 95.67 \\
-51   & 99.37 & 93.86 \\
+1    & 61.52 & 93.14 \\
+11   & 98.92 & 95.31 \\
+21   & 99.01 & 97.11 \\
+31   & 98.37 & 91.34 \\
+41   & 99.73 & 94.22 \\
+51   & 99.46 & 94.58 \\
 61   & 99.64 & 93.86 \\
-71   & 99.64 & 94.58 \\
-81   & 99.10 & 92.06 \\
-91   & 99.46 & 94.22 \\
-101  & 99.91 & 94.22 \\
+71   & 99.82 & 93.50 \\
+81   & 99.37 & 95.67 \\
+91   & 99.28 & 94.58 \\
+101  & 99.37 & 94.58 \\
 \midrule
-\multicolumn{3}{c}{Best test accuracy: 96.75\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 97.11\%} \\
 \bottomrule
 \end{tabular}
 \label{tab:task3-cut2-accuracy}
@@ -827,9 +838,9 @@ In Tables (
 	\ref{tab:task3-bonus-cutb-accuracy},
 	\ref{tab:task3-bonus-cutc-accuracy},
 	\ref{tab:task3-bonus-cutd-accuracy},
-	\ref{tab:task3-bonus-cute-accuracy},
-) showcase the accuracies respectively
-for Cut A, B, C, D, E.
+	\ref{tab:task3-bonus-cute-accuracy}
+),the accuracies for respectively
+for Cut A, B, C, D, E are showcased.
 
 \begin{table}[htbp]
 \centering
@@ -838,22 +849,22 @@ for Cut A, B, C, D, E.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 18.61 & 19.86 \\
-11   & 17.16 & 14.44 \\
-21   & 17.71 & 14.44 \\
-31   & 16.71 & 14.44 \\
-41   & 18.07 & 14.44 \\
-51   & 17.16 & 14.44 \\
-61   & 17.62 & 14.44 \\
-71   & 17.89 & 14.44 \\
-81   & 18.61 & 14.44 \\
-91   & 17.62 & 14.44 \\
-101  & 17.80 & 14.44 \\
+1    & 19.24 & 15.88 \\
+11   & 15.36 & 14.08 \\
+21   & 18.07 & 14.44 \\
+31   & 16.53 & 14.44 \\
+41   & 16.53 & 14.44 \\
+51   & 17.52 & 14.44 \\
+61   & 18.79 & 14.44 \\
+71   & 16.80 & 14.44 \\
+81   & 16.80 & 14.44 \\
+91   & 17.43 & 14.44 \\
+101  & 18.79 & 14.44 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 19.86\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 15.88\%} \\
 \bottomrule
 \end{tabular}
-\label{tab:task3-model-cuta-accuracy}
+\label{tab:task3-bonus-cuta-accuracy}
 \end{table}
 
 \begin{table}[htbp]
@@ -863,22 +874,22 @@ for Cut A, B, C, D, E.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 21.86 & 23.10 \\
-11   & 16.80 & 17.69 \\
-21   & 17.25 & 14.44 \\
-31   & 16.08 & 14.44 \\
-41   & 17.89 & 14.44 \\
-51   & 16.71 & 14.44 \\
-61   & 17.71 & 14.44 \\
-71   & 17.52 & 14.44 \\
-81   & 17.43 & 14.44 \\
-91   & 17.80 & 14.44 \\
-101  & 16.26 & 14.44 \\
+1    & 16.80 & 16.61 \\
+11   & 17.98 & 14.80 \\
+21   & 17.71 & 14.44 \\
+31   & 17.16 & 14.44 \\
+41   & 17.62 & 14.44 \\
+51   & 18.52 & 14.44 \\
+61   & 17.34 & 14.44 \\
+71   & 18.88 & 14.44 \\
+81   & 17.25 & 14.44 \\
+91   & 17.16 & 14.44 \\
+101  & 16.62 & 14.44 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 23.10\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 16.61\%} \\
 \bottomrule
 \end{tabular}
-\label{tab:task3-model-cutb-accuracy}
+\label{tab:task3-bonus-cutb-accuracy}
 \end{table}
 
 \begin{table}[htbp]
@@ -888,22 +899,22 @@ for Cut A, B, C, D, E.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 20.42 & 33.57 \\
-11   & 37.13 & 46.93 \\
-21   & 38.57 & 45.49 \\
-31   & 39.30 & 45.13 \\
-41   & 38.93 & 46.57 \\
-51   & 38.57 & 42.24 \\
-61   & 38.75 & 43.32 \\
-71   & 39.66 & 45.13 \\
-81   & 40.56 & 41.88 \\
-91   & 39.48 & 41.88 \\
-101  & 37.85 & 42.60 \\
+1    & 21.77 & 24.55 \\
+11   & 30.17 & 30.69 \\
+21   & 31.17 & 26.71 \\
+31   & 26.02 & 25.27 \\
+41   & 31.07 & 28.88 \\
+51   & 30.53 & 28.52 \\
+61   & 30.98 & 28.52 \\
+71   & 30.35 & 28.52 \\
+81   & 31.53 & 28.88 \\
+91   & 29.09 & 28.88 \\
+101  & 29.36 & 28.88 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 50.90\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 35.38\%} \\
 \bottomrule
 \end{tabular}
-\label{tab:task3-model-cutc-accuracy}
+\label{tab:task3-bonus-cutc-accuracy}
 \end{table}
 
 \begin{table}[htbp]
@@ -913,22 +924,22 @@ for Cut A, B, C, D, E.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 29.81 & 67.15 \\
-11   & 91.69 & 85.56 \\
-21   & 95.84 & 93.50 \\
-31   & 96.30 & 95.31 \\
-41   & 97.20 & 92.78 \\
-51   & 96.75 & 94.58 \\
-61   & 98.64 & 93.86 \\
-71   & 97.29 & 94.22 \\
-81   & 98.46 & 92.06 \\
-91   & 98.64 & 89.89 \\
-101  & 97.65 & 91.70 \\
+1    & 34.24 & 77.26 \\
+11   & 92.59 & 92.06 \\
+21   & 95.66 & 92.78 \\
+31   & 95.03 & 91.34 \\
+41   & 96.75 & 94.58 \\
+51   & 97.56 & 93.50 \\
+61   & 95.75 & 91.70 \\
+71   & 97.20 & 91.70 \\
+81   & 98.10 & 90.25 \\
+91   & 97.92 & 90.97 \\
+101  & 98.74 & 93.14 \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 95.67\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 94.58\%} \\
 \bottomrule
 \end{tabular}
-\label{tab:task3-model-cutd-accuracy}
+\label{tab:task3-bonus-cutd-accuracy}
 \end{table}
 
 \begin{table}[htbp]
@@ -938,22 +949,22 @@ for Cut A, B, C, D, E.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 61.79 & 91.70 \\
-11   & 98.92 & 94.58 \\
-21   & 99.19 & 95.31 \\
-31   & 99.37 & 94.58 \\
-41   & 98.83 & 94.22 \\
-51   & 99.37 & 95.67 \\
-61   & 99.19 & 95.67 \\
-71   & 99.01 & 93.50 \\
-81   & 99.82 & 94.58 \\
-91   & 99.28 & 94.95 \\
-101  & 99.55 & 94.58 \\
+1    & 59.53 & 91.34 \\
+11   & 98.28 & 92.42 \\
+21   & 98.74 & 93.86 \\
+31   & 98.92 & 94.95 \\
+41   & 99.19 & 96.03 \\
+51   & 99.46 & 93.86 \\
+61   & 99.37 & 92.78 \\
+71   & 99.19 & 93.14 \\
+81   & 99.01 & 94.22 \\
+91   & 99.28 & 93.50 \\
+101  & 99.82 & 94.95 \\
 \midrule
 \multicolumn{3}{c}{Best validation accuracy: 96.75\%} \\
 \bottomrule
 \end{tabular}
-\label{tab:task3-model-cute-accuracy}
+\label{tab:task3-bonus-cute-accuracy}
 \end{table}
 
 
