@@ -228,8 +228,7 @@ which is exactly the desired behavior.
 The training loop implemented follows a similar pattern provided by PyTorch documentation.
 
 \textbf{Reproducibility}:
-The seed is  
-set initially to 
+The seed is set initially to 
 \pyth{np.random.seed(), torch.manual_seed()}
 and passed to the functions
 \pyth{train_test_split(..., random_state=...)}
@@ -254,6 +253,18 @@ More on that on \href{https://pytorch.org/docs/stable/notes/randomness.html}{
 	CUDA convolution determinism - PyTorch documentation
 }.
 
+
+\subsection*{Reproduction Package}
+
+The models used for the report are stored in \textit{.pth} PyTorch format
+in my personal 
+\href{https://usi365-my.sharepoint.com/:f:/g/personal/moralj_usi_ch/EjFmZ00gxlVNtqGCawGJx9sBzvia6ry5RqAWAV4rOLi3CA?e=rTWhEa}{
+	USI OneDrive shared folder
+}.
+All the plots and tables are generated using such models 
+and the same dataset thanks to the seed set in the notebook.
+
+
 \subsection*{6}
 
 In Table (\ref{tab:task1-accuracy}),
@@ -272,19 +283,19 @@ The context is the one from the previous Table (\ref{tab:task1-accuracy}).
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 19.87  & 18.41  \\
-11   & 47.88  & 31.77  \\
-21   & 72.99  & 38.99  \\
-31   & 85.37  & 31.77  \\
-41   & 98.92  & 34.66  \\
-51   & 77.51  & 25.63  \\
-61   & 99.91  & 33.21  \\
-71   & 100.00 & 32.13  \\
-81   & 100.00 & 31.41  \\
-91   & 100.00 & 32.49  \\
-101  & 100.00 & 31.77  \\
+1    & 19.87  & 25.36  \\
+11   & 47.88  & 28.99  \\
+21   & 72.99  & 39.86  \\
+31   & 85.37  & 34.78  \\
+41   & 98.92  & 38.41  \\
+51   & 77.51  & 32.61  \\
+61   & 99.91  & 37.68  \\
+71   & 100.00 & 33.33  \\
+81   & 100.00 & 34.06  \\
+91   & 100.00 & 34.06  \\
+101  & 100.00 & 33.33  \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 38.99\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 39.86\%} \\
 \bottomrule
 \end{tabular}
 \label{tab:task1-accuracy}
@@ -301,20 +312,20 @@ The context is the one from the previous Table (\ref{tab:task1-accuracy}).
 
 Overall, after assessing the performances of the network on the unseen test set
 the model is realiable in estimating the classification of the images with
-a best accuracy slightly lower XXX than the one on the validation set,
-and the average of the accuracies are around XXX,
-with a variance of XXX.
+a best accuracy slightly lower of 38.13\% than the best one of the validation set.
+The variance of the accuracies is huge: 209.89.
+To complement, the Loss averaged is 1.90. 
 
-The delusional result is due to the nature of Feed Forward Neural Network:
+The delusional and unreliable result is due to the nature of Feed Forward Neural Network:
 the learning is focused on pixel per pixel,
 while a desired and more useful approach would be the ones resembling human interaction,
 i.e. a broad overview of the whole image,
-analyzing it at chunks.
+analyzing it in chunks.
 
 As it is difficult for us to spot an image from a puzzle piece,
-the FFNN has a metaphorically resembling trouble.
+the FFNN has a metaphorically resembling trouble with image pixels.
 
-For us humans, if we might be able to immediately recognize a person (macro-concept) 
+For us humans, we might be able to recognize a person (macro-concept) 
 from its smile (micro-concept).
 A similar concept is the key to improve the results 
 and lead to the CNN model approach in Task 2.
@@ -322,10 +333,12 @@ and lead to the CNN model approach in Task 2.
 
 \subsection*{8 BONUS}
 
-The bonus was completed using the mean and average for each RGB channel.
+The bonus was completed with the following features:
+the mean and average for each RGB channel.
+
 In Figure (\ref{fig:task1-bonus-accuracy}) 
 and Table (\ref{tab:task1-bonus-accuracy}), 
-the results thought show a similar slightly lower accuracy value during training.
+the results show a similar slightly lower accuracy value during training.
 
 \begin{table}[htbp]
 \centering
@@ -334,19 +347,19 @@ the results thought show a similar slightly lower accuracy value during training
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 17.89  & 24.55  \\
-11   & 31.35  & 25.27  \\
-21   & 31.44  & 28.16  \\
-31   & 31.44  & 29.96  \\
-41   & 31.98  & 27.44  \\
-51   & 32.16  & 32.13  \\
-61   & 32.43  & 32.13  \\
-71   & 32.88  & 32.85  \\
-81   & 34.33  & 29.96  \\
-91   & 34.15  & 31.05  \\
-101  & 34.15  & 33.94  \\
+1    & 19.15  & 20.29  \\
+11   & 30.80  & 21.01  \\
+21   & 31.89  & 21.74  \\
+31   & 32.34  & 25.36  \\
+41   & 31.71  & 29.71  \\
+51   & 33.60  & 23.91  \\
+61   & 33.51  & 31.16  \\
+71   & 34.24  & 26.81  \\
+81   & 34.06  & 29.71  \\
+91   & 34.96  & 29.71  \\
+101  & 35.41  & 26.09  \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 34.30\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 32.61\%} \\
 \bottomrule
 \end{tabular}
 \label{tab:task1-bonus-accuracy}
@@ -359,13 +372,30 @@ the results thought show a similar slightly lower accuracy value during training
 \label{fig:task1-bonus-accuracy}
 \end{figure}
 
-The validation results highlighting XXX with variance of XXX.
-I would have like to put more features in order to get a better model.
+The performance assessment done on the test set 
+yields an accuracy of: 35.25\%.
+It highlights a slightly lower accuracy 
+with respect to the model from T1 with variance of 36.85,
+which is far better than the previous model,
+but still not enough to be considered reliable for image classification.
+To complement, the Loss averaged is 1.58.
 
-The statistical comparison with the FFNN model without features yield 
+Despite more features regarding the image could have been added,
+one should be careful to reason about the logical implication of it.
+As previously said, the Feed Forward Neural Network 
+is not the best model for image classification
+due to its nature of pixel per pixel analysis.
+Most of these features are not useful for the model to learn from:
+althought same type of lions might share the same color of the fur,
+most of the proposed felines share a common color palette.
+
+Moreover, the statistical comparison with p-value test set to 
+\( p = 0.05 \).
+between the FFNN model without features yield 
 the following results:
-there XXXXX statistical significantly difference with the \( p-value = 0.05 \).
-The best result is yild by model XXXXX with best accuracy XXXX and variance of XXXX.
+there is \textbf{no statistical significantly difference}. 
+The resulted values from statistical comparison are:
+\( t\_statistic = -0.15, p\_value = 0.89 \).
 
 It suffers from the same disadvantages from FFNN discussed previously,
 so the improvement is sadly bounded by the model nature.
@@ -398,6 +428,10 @@ Implement a multi-class classifier (CNN model) to identify the class of the imag
 \item Qualitatively and \textbf{statistically} compare the results 
 obtained in T1 with the ones obtained in T2. 
 Explain what you think the motivations for the difference in performance may be.
+
+\item Apply image manipulation and augmentation techniques in order to improve the performance
+of your models. Evaluate the performance of the model using the new images and compare the
+results with the previous evaluation performed in part 3. Provide your observations and insights.
 
 \item \textbf{Bonus} (Optional) 
 Tune the model hyper-parameters with a \textbf{grid search} 
