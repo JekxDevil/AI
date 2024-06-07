@@ -228,25 +228,28 @@ which is exactly the desired behavior.
 The training loop implemented follows a similar pattern provided by PyTorch documentation.
 
 \textbf{Reproducibility}:
-The seed is passed to the functions 
-\pyth{train_test_split(..., random_state=...)}
-and set initially to 
+The seed is  
+set initially to 
 \pyth{np.random.seed(), torch.manual_seed()}
+and passed to the functions
+\pyth{train_test_split(..., random_state=...)}
 to ensure the reproducibility of the results.
 Since I had problems with the dataset and loaders, 
 I figured out that by setting the seed to the same value
 to all "pseudo-random" functions,
 I will eventually have the same charateristics of the dataset, 
 i.e. same ordering.
-It was a nice and useful trick to have the same dataset per every run
+It was a nice and useful trick to \textbf{have the same dataset per every run}
 and also creating new data that won't mess up with the previous ones due to 
 object references and how the data is loaded in memory.
+Proof of the same dataset per every run is the same accuracy and loss values
+across the Task 1 and its bonus because of determinism in seed and FFNN operations.
 Despite this, only the first Task 1 and its bonus lead to 
-deterministic loss values throught traning epochs.
+reproducible results.
 The reason behind is that despite setting the seeds, 
 the table results in this report can be different because
-the torch libraries to perform non deterministic operations
-for convolutions, used from Task 2 onwards.
+the torch library performs non deterministic operations
+and algorithm choices for convolutions, used from Task 2 onwards.
 More on that on \href{https://pytorch.org/docs/stable/notes/randomness.html}{
 	CUDA convolution determinism - PyTorch documentation
 }.
