@@ -114,7 +114,9 @@ However, you are required to follow \textbf{exactly} the assignment's specificat
 %----------------------------------------------------------------------------------------
 \section{Image Classification with Fully Connected Feed Forward Neural Networks (FFNN)}
 
-In this task, you will try and build a classifier for the provided dataset. This task, you will build a classic Feed Forward Neural Network.
+In this task, you will try and build a classifier for the provided dataset. 
+This task, you will build a classic Feed Forward Neural Network.
+
 
 \begin{enumerate}
 \item Download and load the dataset using the following 
@@ -122,6 +124,7 @@ In this task, you will try and build a classifier for the provided dataset. This
 The dataset consist of 7 classes with a folder for each class images. 
 The classes are 'CHEETAH' ,'OCELOT', 'SNOW LEOPARD', 'CARACAL', 'LIONS', 'PUMA', 'TIGER'. 
 Check Cell 1 in 'example.ipynb' to find the ready and implemented function to load the dataset. 
+\underline{Errata Corrige: The dataset provided has no 'SNOW LEOPARD' class.}
 
 \item Preprocess the data: normalize each pixel of each channel so that the range is [0, 1].
 
@@ -214,7 +217,7 @@ the configuration description for the training and assignment overall are:
 \begin{itemize}
 	\item \textbf{seed} 20020309 
 	\item \textbf{learning rate} 0.001
-	\item \textbf{batch size}
+	\item \textbf{batch size} 32
 	\item \textbf{cuda} enabled
 	\item \textbf{epochs} 101
 	\item \textbf{loss function} cross entropy 
@@ -310,10 +313,12 @@ The context is the one from the previous Table (\ref{tab:task1-accuracy}).
 
 \subsection*{7}
 
-Overall, after assessing the performances of the network on the unseen test set
-the model is realiable in estimating the classification of the images with
-a best accuracy slightly lower of 38.13\% than the best one of the validation set.
-The variance of the accuracies is huge: 209.89.
+Overall, after assessing the performances of the network on the unseen test set,
+the model is not realiable in estimating the classification of the images: 
+its test accuracy is 38.13\%, slightly lower than the best one of the validation set,
+meaning very poor performance thought is already above the random guess of
+\( 1/6 \approx 16.67\% \).
+The variance of the accuracies is unrealiably big: 209.89.
 To complement, the Loss averaged is 1.90. 
 
 The delusional and unreliable result is due to the nature of Feed Forward Neural Network:
@@ -372,7 +377,7 @@ the results show a similar slightly lower accuracy value during training.
 \label{fig:task1-bonus-accuracy}
 \end{figure}
 
-The performance assessment done on the test set 
+The performance assessment done on the unseen same test set 
 yields an accuracy of: 35.25\%.
 It highlights a slightly lower accuracy 
 with respect to the model from T1 with variance of 36.85,
@@ -390,7 +395,7 @@ althought same type of lions might share the same color of the fur,
 most of the proposed felines share a common color palette.
 
 Moreover, the statistical comparison with p-value test set to 
-\( p = 0.05 \).
+\( p = 0.05 \)
 between the FFNN model without features yield 
 the following results:
 there is \textbf{no statistical significantly difference}. 
@@ -400,7 +405,7 @@ The resulted values from statistical comparison are:
 It suffers from the same disadvantages from FFNN discussed previously,
 so the improvement is sadly bounded by the model nature.
 
-\newpage
+\clearpage
 %----------------------------------------------------------------------------------------
 %	Task 2
 %----------------------------------------------------------------------------------------
@@ -409,6 +414,7 @@ so the improvement is sadly bounded by the model nature.
 
 Implement a multi-class classifier (CNN model) to identify the class of the images: 
 'CHEETAH' ,'OCELOT', 'SNOW LEOPARD', 'CARACAL', 'LIONS', 'PUMA', 'TIGER'.
+\underline{Errata Corrige: The dataset provided has no 'SNOW LEOPARD' class.}
 
 \begin{enumerate}
 \item Follow steps 1 and 2 from T1 to prepare the data.
@@ -429,7 +435,8 @@ Implement a multi-class classifier (CNN model) to identify the class of the imag
 obtained in T1 with the ones obtained in T2. 
 Explain what you think the motivations for the difference in performance may be.
 
-\item Apply image manipulation and augmentation techniques in order to improve the performance
+\item \underline{Errata Corrige: from README.md} 
+Apply image manipulation and augmentation techniques in order to improve the performance
 of your models. Evaluate the performance of the model using the new images and compare the
 results with the previous evaluation performed in part 3. Provide your observations and insights.
 
@@ -449,27 +456,30 @@ to improve the performances (if feasible).
 
 \subsection*{3}
 
-The following train parameters were chosen for the model.
-The Optimizer chosen is XXXX because XXXX.
-The loss function used is the CrossEntropyLoss function, 
-which fits the categorical nature of the classification problem.
+The following train parameters were chosen for the model:
+for the optimizer, the \textbf{Adam optimizer} was chosen 
+because of its adaptative learning rate
+and its ability to handle sparse gradients on noisy problems.
+Instead, for the loss function, the \textbf{CrossEntropyLoss} was chosen 
+because it is suitable for multi-class classification problems,
+perfectly fitting its categorical nature.
 
 
 \subsection*{4}
 
 In Table (\ref{tab:task2-accuracy}),
-the accuracy along the epochs is shown.
+the validation accuracy along the epochs is shown.
 
 In Figure (\ref{fig:task2-accuracy}), 
 I provide the plot with epochs on the x-axis where two graphs are plotted:
 the train and validation accuracies.
 The context is the one from the previous Table (\ref{tab:task2-accuracy}). 
 
-Overall, after assessing the performances of the network on the unseen test set
-the model is realiable in estimating the classification of the images with
-a best accuracy slightly lower XXX than the one on the validation set,
-and the average of the accuracies are around XXX,
-with a variance of XXX.
+Overall, after assessing the performances of the network on the same unseen test set,
+the model is estimating the classification of the images with an accuracy of 65.47\%, 
+slightly lower than the best one on the validation set.
+The variance of the accuracy is 34.85, and to complement, the loss averaged is 2.2034.
+The model performs better than the odds of a coin flip!
 
 \begin{table}[htbp]
 \centering
@@ -478,19 +488,19 @@ with a variance of XXX.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 19.15 & 21.30 \\
-11   & 97.92 & 64.26 \\
-21   & 100.00 & 67.51 \\
-31   & 100.00 & 67.51 \\
-41   & 100.00 & 67.15 \\
-51   & 100.00 & 66.43 \\
-61   & 100.00 & 66.43 \\
-71   & 100.00 & 67.15 \\
-81   & 100.00 & 67.87 \\
-91   & 100.00 & 68.59 \\
-101  & 100.00 & 68.59 \\
+1    & 19.15  & 13.04  \\
+11   & 98.92  & 61.59  \\
+21   & 100.00 & 68.12  \\
+31   & 100.00 & 67.39  \\
+41   & 100.00 & 67.39  \\
+51   & 100.00 & 67.39  \\
+61   & 100.00 & 67.39  \\
+71   & 100.00 & 67.39  \\
+81   & 100.00 & 67.39  \\
+91   & 100.00 & 67.39  \\
+101  & 100.00 & 67.39  \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 68.59\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 68.12\%} \\
 \bottomrule
 \end{tabular}
 \label{tab:task2-accuracy}
@@ -506,10 +516,29 @@ with a variance of XXX.
 
 \subsection*{5}
 
-The statistical comparison between the simple FFNN and the current CNN model yield 
+The statistical comparison with p-value test set to 
+\( p = 0.05 \),
+between the simple FFNN from Task 1 and the current CNN model yield 
 the following results:
-there XXXXX statistical significantly difference with the \( p-value = 0.05 \).
-The best result is yield by model XXXXX with best accuracy XXXX and variance of XXXX.
+\textbf{there is statistical significantly difference}.
+The resulted values from statistical comparison are:
+\( t\_statistic = -3.78, p\_value = 0.019 \).
+
+The accuracy more than doubled from the FFNN model to the CNN model.
+The reason for such improvement is the nature of the CNN model:
+it is able to capture the spatial dependencies in the image through the application of relevant filters.
+The CNN model is able to learn the features of the image in a more efficient way,
+than pixel per pixel analysis of the FFNN model,
+and it is able to generalize better to unseen data
+using the locality principle:
+the closer the pixels, the more they are related to each other.
+
+Now, instead that a puzzle piece, 
+imagine that you are able to see a cropped square 
+of part of the image with a blurring effect.
+Well, patterns are more easily recognizable
+and the convolutional layers are able to learn these patterns.
+Image recognition is a task that suitable for CNN models.
 
 \subsection*{6 (present only in README.md)}
 \textit{
@@ -518,6 +547,8 @@ Evaluate the performance of the model using the new images
 and compare the results with the previous evaluation performed in part 3. 
 Provide your observations and insights.
 }
+\newline
+
 In Table (\ref{tab:task2-aug-accuracy}),
 the accuracy along the epochs is shown.
 
@@ -526,11 +557,13 @@ I provide the plot with epochs on the x-axis where two graphs are plotted:
 the train and validation accuracies.
 The context is the one from the previous Table (\ref{tab:task2-aug-accuracy}). 
 
-Overall, after assessing the performances of the network on the unseen test set
-the model is realiable in estimating the classification of the images with
-a best accuracy slightly lower XXX than the one on the validation set,
-and the average of the accuracies are around XXX,
-with a variance of XXX.
+Overall, after assessing the performances of the network on the same unseen test set
+the model is more realiable in estimating the classification of the images with
+a test accuracy of 85.61\%, 
+slightly lower than the best one from validation. 
+Thought, its variance is a bit high: 50.78,
+leading to skepticality on new unseed data not from the current dataset.
+To complement, the test loss averaged is 0.65.
 
 \begin{table}[htbp]
 \centering
@@ -539,19 +572,19 @@ with a variance of XXX.
 \toprule
 \textbf{Epoch} & \textbf{Train Accuracy (\%)} & \textbf{Validation Accuracy (\%)} \\
 \midrule
-1    & 17.89 & 23.10 \\
-11   & 63.23 & 70.40 \\
-21   & 78.95 & 79.78 \\
-31   & 86.72 & 76.17 \\
-41   & 91.96 & 80.51 \\
-51   & 95.21 & 79.42 \\
-61   & 95.75 & 82.67 \\
-71   & 96.21 & 81.23 \\
-81   & 96.75 & 80.14 \\
-91   & 98.74 & 87.36 \\
-101  & 98.19 & 83.03 \\
+1    & 17.98  & 14.49  \\
+11   & 67.39  & 56.52  \\
+21   & 83.92  & 81.88  \\
+31   & 90.70  & 72.46  \\
+41   & 93.32  & 81.16  \\
+51   & 94.49  & 81.16  \\
+61   & 97.02  & 82.61  \\
+71   & 98.01  & 85.51  \\
+81   & 98.46  & 86.23  \\
+91   & 97.20  & 84.78  \\
+101  & 98.19  & 78.99  \\
 \midrule
-\multicolumn{3}{c}{Best validation accuracy: 87.36\%} \\
+\multicolumn{3}{c}{Best validation accuracy: 87.68\%} \\
 \bottomrule
 \end{tabular}
 \label{tab:task2-aug-accuracy}
@@ -563,6 +596,32 @@ with a variance of XXX.
 \caption{Train \& Validation accuracies for Augmented CNN}
 \label{fig:task2-aug-accuracy}
 \end{figure}
+
+The statistical comparison with p-value test set to 
+\( p = 0.05 \),
+between the simple CNN model from Task 1 and the current augmented CNN model yield 
+the following results:
+\textbf{there is statistical significantly difference}.
+The resulted values from statistical comparison are:
+\( t\_statistic = -5.05, p\_value < 0.01 \).
+
+The accuracy gained 20\% with respect to the simple CNN model.
+The reason for such improvement is the augmentation provided
+transforming the input images throughtout the CNN model:
+techniques as increasing/decreasing the brightness, contrast and saturation 
+of the images can potentially highlight the features of the images 
+characterizing the feline types.
+Cropping could also lend a hand in the model, 
+zooming in the most important parts of the image
+in order for the principle of locality to work better.
+Other random transformations as horizontal flips and random rotations
+doubtably help the model to generalize better to unseen data, in my opinion.
+
+The result is a model that is able to generalize better to unseen data,
+yielding satisfying results on the test set.
+The main advantages here are grounded up from the CNN properties 
+with the proposed augmentation techniques in order to apply a bit of fine tuning to the already 
+working model.
 
 
 \subsection*{7 BONUS}
